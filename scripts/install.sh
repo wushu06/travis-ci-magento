@@ -3,7 +3,7 @@
 set -e
 trap '>&2 echo Error: Command \`$BASH_COMMAND\` on line $LINENO failed with exit code $?' ERR
 
-INSTALL_SCRIPTS_PATH="$(pwd)/${TRAVIS_SCRIPTS_PATH}/steps/install"
+INSTALL_SCRIPTS_PATH="$(pwd)/scripts/steps/install"
 
 cd $MAGENTO_DIR
 

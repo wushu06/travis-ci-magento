@@ -22,7 +22,6 @@ cache:
   apt: true
   directories: ${HOME}/.composer/cache
 before_install:
-  - cd ../..
   - ./${TRAVIS_SCRIPTS_PATH}/before_install.sh
 install:
   - ./${TRAVIS_SCRIPTS_PATH}/install.sh
