@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\CustomField\Input\Renderer\Text */
+?>
+<input id="<?php /* @noEscape */ echo $block->getUid() ?>"
+       name="<?php /* @noEscape */ echo $block->getFieldName() ?>"
+       type="text"
+       class="<?php /* @noEscape */ echo $block->getFieldClass() ?>"
+       value="<?php echo $block->escapeHtml($block->getValue()) ?>" />

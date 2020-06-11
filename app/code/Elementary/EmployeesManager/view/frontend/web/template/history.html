@@ -1,0 +1,75 @@
+<div class="employee-profile-orders-wrapper">
+    <h2 data-bind="text: 'Order History'"></h2>
+    <div class="employee_orders_wrapper" id="employeeOrders">
+        <!-- ko if: total() <= 0  -->
+        <div>
+            <span>No orders matching this account!</span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: total() > 0  -->
+<!--        <div class="search-orders">-->
+<!--            <form data-bind="submit: searchOrderKey">-->
+<!--                <input type="text" placeholder="Search order" data-bind="textInput: search_order"/>-->
+<!--                <button type="submit" data-bind="click: searchOrder, text: 'search'"></button>-->
+<!--            </form>-->
+
+<!--        </div>-->
+
+        <div  data-bind="foreach: { data: ordersData, as: 'order' }">
+            <div>
+                <div> <!-- order main details -->
+                    <div>
+                        <ul class="order-data-th">
+                            <li>Order</li>
+                            <li>Date</li>
+                            <li>Ship to</li>
+                            <li>Order total</li>
+                            <li>Status</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div  data-bind="foreach: Object.values(order)">
+                        <ul  data-bind="attr: {class:  $index() % 2 == 0 ? 'order-data-td even' : 'order-data-td'}"> <!-- order data start -->
+                            <li data-bind="text: real_order_id"></li>
+                            <li data-bind="text: date"></li>
+                            <li data-bind="text: ship"></li>
+                            <li data-bind="text: total"></li>
+                            <li data-bind="text: status"></li>
+                            <li>
+                                <button class="primary action" data-bind="{click: $parents[1].showOrder.bind(this, event), text: 'View Order'}"></button>
+                            </li>
+                        </ul><!-- order data end -->
+                        <div data-bind="attr:{ id: 'item' + id, class:  $index() % 2 == 0 ? 'order-data-details even' : 'order-data-details'}" style="display: none"> <!-- options start -->
+                            <h4>Order details</h4>
+                            <div class="order-data-details-data" data-bind="attr:{ id: 'itemDetails' + id}"></div>
+                        </div><!-- options end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="loader">
+            <div class="load-wrapp">
+                <div class="load-6">
+                    <div class="letter-holder">
+                        <div class="l-1 letter">L</div>
+                        <div class="l-2 letter">o</div>
+                        <div class="l-3 letter">a</div>
+                        <div class="l-4 letter">d</div>
+                        <div class="l-5 letter">i</div>
+                        <div class="l-6 letter">n</div>
+                        <div class="l-7 letter">g</div>
+                        <div class="l-8 letter">.</div>
+                        <div class="l-9 letter">.</div>
+                        <div class="l-10 letter">.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

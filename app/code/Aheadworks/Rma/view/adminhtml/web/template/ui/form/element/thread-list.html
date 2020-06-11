@@ -1,0 +1,12 @@
+<ul class="aw-rma__thread-messages">
+    <li repeat="foreach: rows, item: '$row'" class="thread-message" data-bind="css: $row().classes">
+        <strong><text args="$row().name"/>, <text args="$row().date"/></strong>
+        <div class="thread-message-text"><text args="$row().text"/></div>
+        <div class="thread-message-attachments">
+            <a outerfasteach="data: $row().attachments, as: '$attachment'"
+               attr="href: $attachment.link" target="_blank">
+                <text args="$attachment.name"/>
+            </a>
+        </div>
+    </li>
+</ul>

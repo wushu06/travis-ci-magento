@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\Order\Item\Renderer\DefaultRenderer */
+?>
+<?php if ($block->canRender()): ?>
+    <?php
+        $item = $block->getItem();
+        $order = $item->getOrder();
+    ?>
+    <tr data-order-id="<?php /* @noEscape */ echo $order->getId() ?>"
+        class="order-item-row"
+        style="display: none;" >
+        <td data-th="<?php echo $block->escapeHtml(__('Product')) ?>" class="col product" colspan="3">
+            <?php if ($block->getItemProduct()): ?>
+                <div class="product product-item-image">
+                    <?php /* @noEscape */ echo $block->getItemProductImageHtml(); ?>
+                </div>
+            <?php endif; ?>
+            <div class="product details product-item-details">
+                <span><?php echo $block->escapeHtml($block->getItemName()) ?></span>
+            </div>
+        </td>
+        <td data-th="<?php echo $block->escapeHtml(__('Items in Order')) ?>" class="col items-info" colspan="2">
+            <ul>
+                <li>
+                    <span class="title"><?php echo $block->escapeHtml(__('Ordered')) ?></span>&nbsp;<span class="content"><?php /* @noEscape */ echo $item->getQtyOrdered() * 1 ?></span>
+                </li>
+                <li>
+                    <span class="title"><?php echo $block->escapeHtml(__('Invoiced')) ?></span>&nbsp;<span class="content"><?php /* @noEscape */ echo $item->getQtyInvoiced() * 1 ?></span>
+                </li>
+                <li>
+                    <span class="title"><?php echo $block->escapeHtml(__('Shipped')) ?></span>&nbsp;<span class="content"><?php /* @noEscape */ echo $item->getQtyShipped() * 1 ?></span>
+                </li>
+                <li>
+                    <span class="title"><?php echo $block->escapeHtml(__('Refunded')) ?></span>&nbsp;<span class="content"><?php /* @noEscape */ echo $item->getQtyRefunded() * 1 ?></span>
+                </li>
+            </ul>
+        </td>
+        <td data-th="<?php echo $block->escapeHtml(__('Items for Return Available')) ?>"
+            class="col items-for-return"
+            colspan="3">
+            <?php if ($block->isItemAvailable($item)): ?>
+                <div class="qty-total">
+                    <span><?php echo $block->escapeHtml(__('%1 available', $block->getItemMaxCount($item))) ?></span>
+                </div>
+            <?php else: ?>
+                <div class="item-message">
+                    <span><?php echo $block->escapeHtml(__('No items to return available.')) ?></span>
+                </div>
+            <?php endif; ?>
+            <?php if ($requestCount = count($block->getRequestsForItem())): ?>
+                <div class="item-message">
+                    <span><?php echo $block->escapeHtml(__('Another Returns for This Product:')) ?></span>
+                </div>
+                <?php foreach ($block->getRequestsForItem() as $request): ?>
+                    <a class="rma-link"
+                       href="<?php echo $block->escapeUrl($block->getRequestViewUrl($request)) ?>">
+                        <span>#<?php /* @noEscape */ echo $request->getIncrementId() ?></span>
+                    </a><?php if (--$requestCount): ?>, <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </td>
+    </tr>
+<?php endif; ?>

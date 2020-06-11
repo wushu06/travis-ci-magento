@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rma_actions.xsd">
+    <action>
+        <title>Create a Replacement Order</title>
+        <operation>replace</operation>
+    </action>
+    <action>
+        <title>Create a Credit Memo</title>
+        <operation>creditmemo</operation>
+    </action>
+</config>

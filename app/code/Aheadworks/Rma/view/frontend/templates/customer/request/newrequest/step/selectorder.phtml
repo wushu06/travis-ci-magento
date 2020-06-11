@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\NewRequest\Step\SelectOrder */
+?>
+<div class="aw-rma-new select-order">
+    <?php if ($block->getProductSelectionBlockHtml()): ?>
+        <div class="block block-rma-text-block">
+            <?php /* @noEscape */ echo $block->getProductSelectionBlockHtml() ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($block->getOrders()): ?>
+        <div class="table-wrapper">
+            <table data-role="aw-rma-select-order" class="aw-rma__select-order-table data table hover-light">
+                <caption class="table-caption">
+                    <?php echo $block->escapeHtml(__('Select order to create RMA')) ?>
+                </caption>
+                <thead>
+                <tr>
+                    <th scope="col" class="col order_id">&nbsp;</th>
+                    <th scope="col" class="col order">
+                        <?php echo $block->escapeHtml(__('Order')) ?>
+                    </th>
+                    <th scope="col" class="col order_date">
+                        <?php echo $block->escapeHtml(__('Order Date')) ?>
+                    </th>
+                    <th scope="col" class="col order_status">
+                        <?php echo $block->escapeHtml(__('Order Status')) ?>
+                    </th>
+                    <th scope="col" class="col info">&nbsp;</th>
+                    <th scope="col" class="col order_total">
+                        <?php echo $block->escapeHtml(__('Order Total')) ?>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($block->getOrders() as $order): ?>
+                    <tr data-order-id="<?php /* @noEscape */ echo $order->getId() ?>" class="order-row">
+                        <td data-th="<?php echo $block->escapeHtml(__('Order #%1', $order->getIncrementId())) ?>"
+                            class="col order-id">
+                            <input type="radio"
+                                   name="order_id"
+                                   value="<?php /* @noEscape */ echo $order->getId() ?>"
+                                   class="aw-rma-order-required aw-rma-order-items-available" />
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order')) ?>" class="col order">
+                            <?php echo $block->escapeHtml(__('Order')) ?> #<?php /* @noEscape */ echo $order->getIncrementId() ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order Date')) ?>" class="col order-date">
+                            <?php /* @noEscape */ echo $block->formatDate($order->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order Status')) ?>" class="col order_status">
+                            <?php echo $block->escapeHtml($order->getStatusLabel()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order Info')) ?>" class="col info">
+                            <div class="order-message">
+                                <?php echo $block->escapeHtml($block->getOrderInfo($order)) ?>
+                            </div>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order Total')) ?>" class="col order_total">
+                            <?php /* @noEscape */ echo $block->convertAndFormatPrice($order->getGrandTotal()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Action')) ?>" class="col action">
+                            <?php if ($block->isAllowedForOrder($order)): ?>
+                                <button type="button"
+                                        title="<?php echo $block->escapeHtml(__('Next')) ?>"
+                                        data-role="next-action"
+                                        class="action primary next"
+                                        disabled="disabled"
+                                        style="display: none"
+                                        data-mage-init='{"awRmaButtonControl":
+                                                {"newLocation": <?php /* @noEscape */ echo \Zend_Json::encode($block->getSubmitUrl($order->getId())) ?>}
+                                            }'>
+                                    <span><?php echo $block->escapeHtml(__('Next')) ?></span>
+                                </button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php foreach ($block->getOrderItemsToRequest($order->getId()) as $orderItem): ?>
+                        <?php /* @noEscape */ echo $block->getItemRendererHtml($orderItem) ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "[data-role=aw-rma-select-order]": {
+                    "awRmaSelectOrderForm": {
+                        "currentOrderId": <?php /* @noEscape */ echo $block->getCurrentOrderId() ?>
+                    }
+                }
+            }
+        </script>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?php echo $block->escapeHtml($block->getNoOrdersMessage()); ?></span>
+        </div>
+    <?php endif; ?>
+</div>

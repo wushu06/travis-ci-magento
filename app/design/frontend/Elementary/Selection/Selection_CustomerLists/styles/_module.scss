@@ -1,0 +1,15 @@
+.wishlist-header {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  li {
+    margin-right: 20px;
+  }
+  li:last-child {
+    margin-right: 0;
+  }
+  .wishlist-from-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}

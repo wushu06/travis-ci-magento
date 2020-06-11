@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\CustomField\Wrapper */
+?>
+<div class="field aw-rma__field <?php /* @noEscape */ echo $block->getAdditionalClasses() ?>">
+    <label class="label" for="<?php /* @noEscape */ echo $block->getUid() ?>">
+        <span>
+            <?php echo $block->escapeHtml($block->getLabel()) ?>
+        </span>
+    </label>
+    <div class="control">
+        <?php /* @noEscape */ echo $block->getChildHtml() ?>
+    </div>
+</div>

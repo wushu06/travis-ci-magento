@@ -1,0 +1,179 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product list template
+ *
+ * @var $block \Selection\Employee\Block\Product\ListProduct
+ */
+?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$isStockOrder = $block->isStockOrder();
+$isPersonalPack = $block->isPersonalPack();
+//$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//$cartObject = $objectManager->create('Magento\Checkout\Model\Cart')->truncate();
+//$cartObject->saveQuote();
+?>
+<?php if (!$_productCollection->count()) : ?>
+    <div class="message info empty">
+        <div><?= $block->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php else : ?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() == 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    </div>
+    </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "bundleUiComponent": {
+                            "component": "Magento_Catalog/js/add-to-cart"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <div id="app"  class="<?= $isStockOrder ? 'stock-order' : '' ?>" data-bind="scope: 'bundleUiComponent'">
+        <input type="hidden" value="<?= $isStockOrder ?>" ref="stockOrder">
+        <div class="page-main">
+            <div class="personal-pack products wrapper <?= /* @noEscape */
+            $viewMode ?> products-<?= /* @noEscape */
+            $viewMode ?>">
+                <ol class="products list items product-items <?= $_productCollection->count() <= 2 ? 'start' : '' ?>">
+                    <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+                    <?php foreach ($_productCollection as $_product) : ?>
+                        <?php
+                        if ($isPersonalPack) {
+                            //  $blockObj = $block->getLayout()->createBlock('Selection\Employee\Block\Form');
+                            echo  $block->getBundleLayout($_product);
+                        }
+
+                        ?>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+        <div  data-bind="attr: {class: toggle ? 'purchase active' : 'purchase'}">
+            <div class="page-main">
+                <div class="purchase-header" data-bind="click: toggleHeader">
+                    <h2>Your total purchase</h2>
+                    <i class="fas fa-chevron-down" ></i>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <!-- ko if: toggle -->
+                <div class="purchase-table" data-bind="attr: {id: optionId}">
+                    <div class="purchase-table_th">
+                        <div class="purchase-td">
+                            <span>Product</span>
+                            <span>Qty</span>
+                        </div>
+                    </div>
+                    <div  data-bind="foreach: { data: itemsArray, as: 'item' }">
+                        <div class="purchase-table_body"  data-bind="foreach: { data: Object.values(item), as: 'options' }">
+                            <div style="width: 100%;"  data-bind="foreach: { data: Object.values(options), as: 'option' }">
+
+                                <div class="purchase-td" >
+                                    <span data-bind="text: name ? name : '-'"></span>
+                                    <span data-bind="text: qty ? qty : '-'"></span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="purchase-table_employee">
+                        <span class="employee_name"></span>
+                    </div>
+                    <div class="purchase-table_error" style="color: red"><span data-bind="text: error"></span></div>
+
+                    <div class="add_to_cart_wrapper">
+                        <span>
+                            <strong>Total £
+                             <span data-bind="text:total"></span>
+                            </strong>
+                        </span>
+
+                        <button class="button primary action" id="addToCart" data-bind="click: addToCart, html: button, attr: {'disabled': disable}" >
+                        </button>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <?= $block->getToolbarHtml() ?>
+    <?php if (!$block->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {
+                    "product_sku": "<?= $block->escapeJs($_product->getSku()) ?>"
+                }
+            }
+        }
+
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+        $('#employeesSelector').on('change', function () {
+            $(this).val() !== '' && $('.employee-name').val($(this).val())
+        });
+        function checkOffset() {
+            if($('.purchase').offset().top + $('.purchase').height()
+                >= $('.page-footer').offset().top - 10)
+                $('.purchase').css('position', 'absolute');
+            if($(document).scrollTop() + window.innerHeight < $('.page-footer').offset().top)
+                $('.purchase').css('position', 'fixed'); // restore when you scroll up
+        }
+        $(document).scroll(function() {
+            checkOffset();
+        });
+
+
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "addToCart": {}
+        }
+    }
+
+</script>
+

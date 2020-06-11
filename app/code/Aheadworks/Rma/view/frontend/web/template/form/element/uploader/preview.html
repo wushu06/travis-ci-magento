@@ -1,0 +1,19 @@
+<div class="aw-rma__file-uploader-summary">
+    <div class="aw-rma__file-uploader-preview">
+        <a attr="href: $parent.getFilePreview($file)" class="title" target="_blank">
+            <text args="$file.name"/>
+        </a>
+        <div class="actions">
+            <button
+                type="button"
+                class="action-remove"
+                data-role="delete-button"
+                attr="title: $t('Delete')"
+                click="$parent.removeFile.bind($parent, $file)">
+                <span translate="'Delete'"/>
+            </button>
+        </div>
+        <input type="hidden" data-bind="attr: {name: $parent.getInputName('name', $file.file)}, value: $file.name">
+        <input type="hidden" data-bind="attr: {name: $parent.getInputName('file_name', $file.file)}, value: $file.file">
+    </div>
+</div>

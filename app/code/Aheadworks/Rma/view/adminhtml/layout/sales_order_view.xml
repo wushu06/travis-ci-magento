@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <referenceBlock name="sales_order_tabs">
+                <block class="Aheadworks\Rma\Block\Adminhtml\Order\View\Tab\Returns" name="aw_rma_sales_order_returns.grid.container"/>
+                <action method="addTabAfter">
+                    <argument name="name" xsi:type="string">aw_rma_order_returns</argument>
+                    <argument name="block" xsi:type="string">aw_rma_sales_order_returns.grid.container</argument>
+                    <argument name="tab_after_name" xsi:type="string">order_shipments</argument>
+                </action>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceBlock name="aw_rma_sales_order_returns.grid.container">
+            <uiComponent name="aw_rma_request_listing"/>
+        </referenceBlock>
+    </body>
+</page>

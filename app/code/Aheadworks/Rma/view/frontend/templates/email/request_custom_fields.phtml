@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var \Aheadworks\Rma\Block\Email\RequestCustomFields $block */
+$customFields = $block->getCustomFields();
+?>
+<?php if ($customFields): ?>
+    <?php foreach ($customFields as $label => $value): ?>
+        <strong><span><?php echo $block->escapeHtml($label) ?>:</span></strong> <?php echo $block->escapeHtml($value) ?><br />
+    <?php endforeach; ?>
+<?php endif; ?>

@@ -1,0 +1,101 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 5%, 0)
+  }
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+h1 {
+  opacity: 0;
+  top: 50px;
+}
+
+.animated {
+  position: relative;
+  opacity: 1;
+  top: 0;
+  animation-name: fadeInUp;
+  animation-duration: 0.3s;
+}
+
+.full-visible {
+  visibility: visible;
+  opacity: 1
+}
+
+/* Underline From Left */
+.page-main, aside.modal-popup {
+  .primary a, .primary button, .action.primary, .action a, a.action {
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    align-items: center;
+    min-height: 50px;
+    transition: 0.3s ease-out;
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      background: $color-red;
+      height: 2px;
+      -webkit-transition-property: right;
+      transition-property: right;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    &:hover {
+      background: #F8F4F3 !important;
+      color: $color-red !important;
+      -webkit-transition-property: right;
+      transition-property: right;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+  }
+
+  .primary a:hover:before,
+  a.action:hover:before,
+  .action.primary:hover:before,
+  .primary button:hover:before,
+  .primary a:focus:before,
+  a.action:focus:before,
+  .action.primary:focus:before,
+  .primary button:focus:before,
+  .primary a:active:before,
+  a.action:active:before,
+  .action.primary:active:before,
+  .primary button:active:before {
+    right: 0;
+  }
+}
+aside.modal-popup {
+  .primary a, .primary button, .action.primary, .action a, a.action {
+    &:before {
+      display: inline-flex;
+    }
+  }
+}
+.page-main {
+  .primary a, .primary button, .action.primary, .action a, a.action {
+    &:before {
+      display: inline-flex !important;
+    }
+  }
+
+}

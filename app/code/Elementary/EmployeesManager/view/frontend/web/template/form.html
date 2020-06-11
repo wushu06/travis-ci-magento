@@ -1,0 +1,80 @@
+<div class="employee_form_wrapper" id="employeeProfile" data-bind="visible: shouldShowMessage">
+    <h2 data-bind="text: profileTitle"></h2>
+    <form id="employeeManager" data-mage-init='{"validation": {}}' >
+        <div class="form-top">
+            <div class="employee_field selection_item_name">
+                <label class="employee_field-label"  for="name">
+                    <span  data-bind="i18n: 'Name'"></span>
+                </label>
+                <div class="employee_field-control">
+                    <input type="text" data-bind="value: name" name="name" id="name" class="form-field" >
+                </div>
+            </div>
+            <div class="employee_field selection_status">
+                <label class="employee_field-label" for="status">
+                    <span data-bind="i18n: 'Status'"></span>
+                </label>
+                <div class="employee_field-control control">
+                    <select
+                        data-bind="options: status_options , optionsCaption: 'Please select', optionsValue: 'id' , optionsText: 'title'  "
+                        class="admin__control-select"
+                        name="status"
+                        id="status"
+                    >
+                    </select>
+                </div>
+            </div>
+            <div class="employee_field selection_area">
+                <label class="employee_field-label" for="display_area">
+                    <span data-bind="i18n: 'Display Area'"></span>
+                </label>
+                <div class="employee_field-control control">
+                    <select
+                        data-bind="options: area , optionsCaption: 'Please select', optionsValue: 'id' , optionsText: 'title'  "
+                        class="admin__control-select"
+                        name="display_area"
+                        id="display_area"
+                    >
+                    </select>
+                </div>
+            </div>
+            <div class="employee_field selection_printed_name">
+                <label class="employee_field-label"  for="printed_name">
+                    <span  data-bind="i18n: 'Printed Name'"></span>
+                </label>
+                <div class="employee_field-control">
+                    <input type="text" data-bind="value: printed_name" name="printed_name" id="printed_name" class="form-field" >
+                </div>
+            </div>
+            <div class="employee_field field choice selection_same_as">
+                <div class="control">
+
+                    <input type="checkbox"   id="same" class="form-field"  data-bind="event: { change: sameAs }"/>
+                    <label class="employee_field-label"  for="same">
+                        <span  data-bind="i18n: 'Same Name'"></span>
+                    </label>
+                </div>
+            </div>
+        </div><!-- / form top end -->
+        <div class="form-bottom">
+
+            <div class="employee_field selection_item_comment">
+                <label class="employee_field-label"  for="comment">
+                    <span  data-bind="i18n: 'Comment'"></span>
+                </label>
+                <div class="employee_field-control">
+                    <textarea name="comment" id="comment" cols="30" rows="10" data-bind="value: comment"></textarea>
+                </div>
+            </div>
+            <div>
+                <button id="addEmployee" class="action primary" data-bind="html: button, attr: {'disabled': disable}, click: addEmployee"></button>
+            </div>
+        </div><!-- / form bottom end -->
+    </form>
+
+
+    <div class="error-wrapper">
+        <span data-bind="text: error"></span>
+    </div>
+
+</div>

@@ -1,0 +1,90 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\BaseImage
+ * @var $block \Magento\GroupedProduct\Block\Product\View\Type\Grouped
+ */
+?>
+<?php $block->setPreconfiguredValue(); ?>
+<?php $_product = $block->getProduct(); ?>
+<?php $name = strtolower(str_replace('-', ' ', $_product->getName())); ?>
+<?php $_associatedProducts = $block->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+
+<div class="table-wrapper grouped">
+    <?php if ($_hasAssociatedProducts) : ?>
+        <div class="grouped-wrapper">
+            <?php foreach ($_associatedProducts as $_item) : ?>
+            <div class="grouped-wrapper-el">
+                <div>
+                    <strong class="product-item-name"><?= str_replace($name,"",strtolower(str_replace('-', ' ',$block->escapeHtml($_item->getName())))) ?></strong>
+                    <?php if ($block->getCanShowProductPrice($_product)) : ?>
+                        <?php if ($block->getCanShowProductPrice($_item)) : ?>
+                            <?= /* @noEscape */ $block->getProductPrice($_item) ?>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                </div>
+                <?php if ($_product->isSaleable()) : ?>
+                <div class="col qty">
+                    <?php if ($_item->isSaleable()) : ?>
+                    <div class="control qty">
+                        <input type="number"
+                               data-bind="event: { change: value_changed.bind($, <?= $_product->getId() ?>, <?= $_item->getId() ?>)}"
+                               data-product-name="<?= $_item->getName() ?>"
+                               data-product-price="<?= $_item->getFinalPrice() ?>"
+                               name="super_group[<?= $block->escapeHtmlAttr($_item->getId()) ?>]"
+                               data-selector="super_group[<?= $block->escapeHtmlAttr($_item->getId()) ?>]"
+                               value="<?= $block->escapeHtmlAttr($_item->getQty() * 1) ?>"
+                               title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                               class="input-text qty"
+                               data-errors-message-box="#validation-message-box"/>
+                    </div>
+                    <div class="qty-units">
+                        <?php
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $StockState = $objectManager->get('\Magento\CatalogInventory\Api\StockStateInterface');
+                        $stockQty = $StockState->getStockQty($_item->getId(), $_product->getStore()->getWebsiteId());
+                        echo $stockQty > 0 ? '<span>'.$stockQty.' units left</span>' : '<span class="out-of-stock">out of stock</span>'
+                        ?>
+                    </div>
+                <?php else : ?>
+                    <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+                        <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                    </div>
+                <?php endif; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+                <?php if ($block->getCanShowProductPrice($_product)
+                && $block->getCanShowProductPrice($_item)
+                && trim($block->getProductPriceHtml(
+                    $_item,
+                    \Magento\Catalog\Pricing\Price\TierPrice::PRICE_CODE
+                ))) : ?>
+                <div class="row-tier-price">
+                    <div>
+                        <?= $block->getProductPriceHtml(
+                            $_item,
+                            \Magento\Catalog\Pricing\Price\TierPrice::PRICE_CODE
+                        ) ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </div>
+        <?php else : ?>
+        <div>
+                <div class="unavailable">
+                    <?= $block->escapeHtml(__('No options of this product are available.')) ?>
+                </div>
+        </div>
+        <?php endif; ?>
+    </table>
+</div>
+<div id="validation-message-box"></div>

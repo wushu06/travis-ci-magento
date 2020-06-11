@@ -1,0 +1,44 @@
+//
+//  Coupon Code Generator block
+//  _____________________________________________
+@aw-rma-clipboard__color: #046E9C;
+
+.admin__fieldset {
+    &.coupon-generator {
+        float: left;
+        margin-top: 8rem;
+        width: 30%;
+
+        .coupon_generate_container {
+            .coupon-code-generation {
+                margin-left: ~"calc( (100%) * 0.5 + 30px )";
+            }
+
+            .coupon-code-result {
+                padding-top: 2.0rem;
+
+                .input-text {
+                    font-size: 16px;
+                }
+
+                .action {
+                    box-shadow: none;
+                    background: transparent;
+                    border: none;
+                    position: relative;
+                    padding: 1rem 0;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 13px;
+                    color: @aw-rma-clipboard__color;
+                    outline: none;
+                    box-sizing: content-box;
+                }
+            }
+        }
+
+        .admin__field-label {
+            width: ~"calc( (100%) * 0.5 - 30px )";;
+        }
+    }
+}

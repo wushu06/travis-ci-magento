@@ -1,0 +1,69 @@
+.modals-wrapper {
+  label {
+    margin-bottom: 5px;
+  }
+  input, select {
+    margin-bottom: 20px;
+  }
+  textarea {
+    max-height: 120px;
+    margin-bottom: 20px;
+  }
+}
+.control, .modals-wrapper {
+  position: relative;
+  i {
+    color: $color-red;
+  }
+  select {
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 2px solid #E2E2E0;
+    background: transparent;
+    background-image: none;
+    height: 40px;
+    margin-bottom: 0;
+
+  }
+  .control {
+    margin-bottom: 20px;
+  }
+  input {
+    height: 40px;
+    border: 2px solid #CECECE !important;
+  }
+  textarea {
+    border: 2px solid #CECECE !important;
+  }
+  label {
+    color: #7A8EA0;
+    font-size: 12px;
+  }
+}
+.employee_form_wrapper {
+  .form-top, .form-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    .selection_item_name {
+      flex: 50%;
+    }
+    .selection_status {
+      flex: 15%;
+      margin: 0 15px;
+    }
+    .selection_area {
+      flex: 15%;
+    }
+    .selection_printed_name {
+      margin-right: 30px;
+    }
+    .selection_item_comment {
+      flex: 50%;
+    }
+  }
+}

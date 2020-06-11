@@ -1,0 +1,20 @@
+<!--@subject {{trans 'RMA #%request_text_id by %customer_name' request_text_id=$request.getTextId() customer_name=$request.getCustomerName()}}@-->
+{{template config_path="design/email/header_template"}}
+
+<p>
+    {{trans
+        'Customer %customer_name has added a new comment to RMA <a href="%admin_url">#%request_text_id</a>'
+    customer_name=$request.getCustomerName() admin_url=$request.getAdminUrl() request_text_id=$request.getTextId()
+    |raw}}
+</p>
+<p>
+    {{trans '%comment' comment=$request.getNotifyCommentText() |nl2br}}
+</p>
+<p>
+    {{trans
+        'You can manage the RMA request <a href="%admin_url">here</a>'
+        admin_url=$request.getAdminUrl()
+    |raw}}
+</p>
+
+{{template config_path="design/email/footer_template"}}

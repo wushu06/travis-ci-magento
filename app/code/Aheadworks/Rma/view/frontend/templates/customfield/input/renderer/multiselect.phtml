@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\CustomField\Input\Renderer\MultiSelect */
+?>
+<select id="<?php /* @noEscape */ echo $block->getUid() ?>"
+        name="<?php /* @noEscape */ echo $block->getFieldName() ?>"
+        class="<?php /* @noEscape */ echo $block->getFieldClass() ?>"
+        multiple="multiple">
+    <?php foreach ($block->getOptions() as $option): ?>
+        <option value="<?php /* @noEscape */ echo $option['value'] ?>"
+            <?php if ($block->isSelected($option['value'])): ?> selected="selected"<?php endif; ?>>
+            <?php echo $block->escapeHtml($option['label']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontCreateEmployee">
+        <arguments>
+            <argument name="customer" defaultValue="customer"/>
+            <argument name="employee" defaultValue="employee"/>
+        </arguments>
+        <click selector="//div[@id='block-collapsible-nav']//a[text()='Employees Manager']" stepKey="clickOnDesiredNavItem" />
+        <amOnPage url="employees/customeremployee/" stepKey="amOnEmployeePage"/>
+        <see selector="h1" userInput="Welcome, Veronica Costello"  stepKey="seeTextInH1"/>
+        <click selector="//a[@class='add-employee']" stepKey="clickOnAddEmployee" />
+        <wait time="3" stepKey="waitForModalLoad" after="clickOnAddEmployee"/>
+        <fillField stepKey="fillEmployeeName" userInput="{{customer.employeeName}}" selector="{{StorefrontCustomerCreateFormSection.employeeNameField}}"/>
+        <fillField stepKey="fillEmployeeComment" userInput="{{customer.employeeComment}}" selector="{{StorefrontCustomerCreateFormSection.employeeCommentField}}"/>
+        <click stepKey="clickAddEmployeeButton" selector="{{StorefrontCustomerCreateFormSection.addEmployeeButton}}"/>
+        <wait time="3" stepKey="waitForEmployeePageLoad" after="clickAddEmployeeButton"/>
+        <waitForElementVisible selector="{{StorefrontCustomerCreateFormSection.success}}" stepKey="waitSuccessMessage"/>
+        <see selector="{{StorefrontCustomerCreateFormSection.success}}" userInput="Employee: {{customer.employeeName}} has been saved" stepKey="seeSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

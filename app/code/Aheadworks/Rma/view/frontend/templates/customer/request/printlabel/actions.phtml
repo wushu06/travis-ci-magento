@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<div class="aw-rma__actions">
+    <?php /* @noEscape */ echo $block->getChildHtml('back') ?>
+    <button id="aw-rma__save"
+            data-role="aw-rma-save-and-print-button"
+            type="submit"
+            class="action primary"
+            title="<?php echo $block->escapeHtml(__('Save and Print Label')) ?>">
+        <span><?php echo $block->escapeHtml(__('Save and Print Label')) ?></span>
+    </button>
+</div>

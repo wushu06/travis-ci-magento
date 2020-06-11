@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <move element="category.image" destination="title.div"/>
+    <!--
+            <move element="breadcrumbs" destination="page.main.title" before="-" />
+    -->
+    <referenceContainer name="content">
+        <block class="Selection\Employee\Block\Form" name="employees.selector"
+               template="Selection_Employee::product/view/selector.phtml" before="-"/>
+    </referenceContainer>
+
+    <referenceBlock name="paypal.partner.right.logo" remove="true"/>
+    <referenceBlock name="product_list_toolbar" remove="true"/>
+
+</page>

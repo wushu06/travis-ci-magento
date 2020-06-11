@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \Magento\Theme\Block\Html\Title
+ * @var $blockObj \Selection\Employee\Block\Product\ListProduct
+ */
+
+$blockObj= $block->getLayout()->createBlock('Selection\Employee\Block\Product\ListProduct');
+$isCatalogPage = $blockObj->isCatalogPage();
+$titleIdHtml = ($block->getTitleId()) ? ' id="' . $block->escapeHtmlAttr($block->getTitleId()) . '"' : '';
+$titleClass = ($block->getTitleClass()) ? ' ' . $block->getTitleClass() : '';
+$isParent = $blockObj->isParentCategory();
+$title = $isCatalogPage ? $blockObj->getCurrentCategory()->getParentCategory()->getName() : $block->getPageTitle();
+?>
+<?php
+if($isParent){?>
+<div style="    margin-bottom: -55px;
+    margin-top: -88px;">
+    <img src="<?=  $blockObj->getCurrentCategory()->getImageUrl() ?>" alt="" width="100%">
+</div>
+<?php } ?>
+<div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+    <?php
+    if(!$isParent){?>
+
+        <h1 class="page-title"<?= /* @noEscape */ $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
+        <?php //echo $block->getChildHtml() ?>
+    <?php } ?>
+</div>

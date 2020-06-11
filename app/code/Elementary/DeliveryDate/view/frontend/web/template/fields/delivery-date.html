@@ -1,0 +1,12 @@
+<div id="calendarField"></div>
+<input style="display:none;" class="input-text" type="text" data-bind="
+    event: {change: userChanges},
+    hasFocus: focused,
+    value: value,
+    datetimepicker: true,
+    attr: {
+        name: inputName,
+        placeholder: placeholder,
+        'aria-describedby': noticeId,
+        disabled: disabled
+    }" readonly="true"/>

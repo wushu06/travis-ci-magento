@@ -1,0 +1,19 @@
+<div class="category-image" data-bind="scope:'customer'">
+    <img data-bind="attr:{src: customer().avatar}" width="300" />
+</div>
+
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "customer": {
+                    "component": "Magento_Customer/js/view/customer"
+                }
+            }
+        }
+    }
+}
+</script>
+

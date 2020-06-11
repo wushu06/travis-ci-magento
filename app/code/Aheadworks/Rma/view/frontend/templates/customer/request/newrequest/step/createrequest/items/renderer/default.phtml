@@ -1,0 +1,111 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\Order\Item\Renderer\DefaultRenderer */
+?>
+<?php if ($block->canRender()): ?>
+    <?php
+        $item = $block->getItem();
+        $isItemAvailable = $block->isItemAvailable($item);
+    ?>
+    <div class="aw-rma__return-item-container">
+        <div class="item-details">
+            <div class="item-select">
+                <?php if ($isItemAvailable): ?>
+                    <input type="checkbox"
+                           data-role="item-return-select"
+                           name="item_selected" class="checkbox aw-rma__order-item-required">
+                <?php endif; ?>
+            </div>
+            <div class="product-details">
+                <?php if ($block->getItemProduct()): ?>
+                    <div class="product product-item-image">
+                        <?php /* @noEscape */ echo $block->getItemProductImageHtml(); ?>
+                    </div>
+                    <div class="product details product-item-details">
+                        <a href="<?php echo $block->escapeUrl($block->getItemProductUrl()) ?>">
+                            <span><?php echo $block->escapeHtml($block->getItemName()) ?></span>
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <?php echo $block->escapeHtml($block->getItemName()) ?>
+                <?php endif; ?>
+                <?php echo $block->getItemPriceHtml(); ?>
+            </div>
+        </div>
+
+        <div class="item-return-details">
+            <div class="content">
+                <div class="messages">
+                    <?php if (!$isItemAvailable): ?>
+                        <div class="item-message">
+                            <span><?php echo $block->escapeHtml(__('No items to return available.')) ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($requestCount = count($block->getRequestsForItem())): ?>
+                        <div class="item-message">
+                            <span><?php echo $block->escapeHtml(__('Other return requests for this product:')) ?></span>
+                        </div>
+                        <?php foreach ($block->getRequestsForItem() as $request): ?>
+                        <a class="rma-link"
+                           href="<?php echo $block->escapeUrl($block->getRequestViewUrl($request)) ?>">
+                            <span>#<?php /* @noEscape */ echo $request->getIncrementId() ?></span>
+                            </a><?php if (--$requestCount): ?>, <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <?php if ($isItemAvailable): ?>
+                    <div class="item-message tick-checkbox">
+                        <span><?php echo $block->escapeHtml(__('Tick checkbox to select.')) ?></span>
+                    </div>
+                <?php endif; ?>
+                <div class="fieldset"
+                     data-role="item-return-container"
+                     <?php if ($isItemAvailable): ?>style="display: none"<?php endif; ?>>
+                    <div class="field aw-rma__field items-to-return required">
+                        <?php if ($isItemAvailable): ?>
+                            <input type="hidden"
+                                   name="order_items[<?php /* @noEscape */ echo $block->getItemNumber() ?>][item_id]"
+                                   value="<?php /* @noEscape */ echo $item->getId() ?>" />
+                            <?php if (($maxCount = $block->getItemMaxCount($item)) > 1): ?>
+                                <?php $elementId = 'item-qty-to-return' . $block->getItemNumber(); ?>
+                                <label class="label required" for="<?php /* @noEscape */ echo $elementId ?>">
+                                    <span><?php echo $block->escapeHtml(__('Qty to Return')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <select id="<?php /* @noEscape */ echo $elementId ?>"
+                                            class="select required-entry"
+                                            name="order_items[<?php /* @noEscape */ echo $block->getItemNumber() ?>][qty]">
+                                        <?php for ($qtyCounter = 1; $qtyCounter <= $maxCount; $qtyCounter++): ?>
+                                            <option value="<?php /* @noEscape */ echo $qtyCounter ?>">
+                                                <?php /* @noEscape */ echo $qtyCounter ?>
+                                            </option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+                                <div class="qty-total">
+                                    <span><?php echo $block->escapeHtml(__('/ %1 available', $maxCount)) ?></span>
+                                </div>
+                            <?php else: ?>
+                                <input type="hidden"
+                                       name="order_items[<?php /* @noEscape */ echo $block->getItemNumber() ?>][qty]"
+                                       value="1" />
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if (($customFields = $block->getCustomFields()) && $isItemAvailable): ?>
+                        <?php foreach ($customFields as $customField): ?>
+                            <?php /* @noEscape */ echo $block->getCustomFieldHtml($customField) ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

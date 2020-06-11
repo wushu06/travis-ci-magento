@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Elementary\EmployeesManager\Api\CustomerEmployeeRepositoryInterface" type="Elementary\EmployeesManager\Model\CustomerEmployeeRepository"/>
+    <preference for="Elementary\EmployeesManager\Api\Data\CustomerEmployeeInterface" type="Elementary\EmployeesManager\Model\Data\CustomerEmployee"/>
+
+    <preference for="Elementary\EmployeesManager\Api\Data\CustomerEmployeeSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <type name="Magento\Sales\Controller\AbstractController\View">
+        <plugin name="selection_employee_plugin_list" type="Elementary\EmployeesManager\Controller\AbstractControllerPlugin\OrderLoader" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\AttributeCache">
+        <arguments>
+            <argument name="unsupportedTypes" xsi:type="array">
+                <item name="elementary_employeesmanager" xsi:type="string">elementary_employeesmanager</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Elementary\EmployeesManager\UI\Component\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Elementary\EmployeesManager\Model\ResourceModel\CustomerEmployee\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RefGridFilterPool</argument>
+        </arguments>
+    </type>
+    <virtualType name="RefGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="elementary_employeesmanager_customeremployee_listing_data_source" xsi:type="string">Elementary\EmployeesManager\Model\ResourceModel\CustomerEmployee\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Elementary\EmployeesManager\Model\ResourceModel\CustomerEmployee\Grid\Collection">
+        <arguments>
+            <argument name="eventPrefix" xsi:type="string">elementary_employeesmanager_customeremployee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">elementary_employeesmanager_customeremployee_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Elementary\EmployeesManager\Model\ResourceModel\CustomerEmployee</argument>
+        </arguments>
+    </type>
+</config>

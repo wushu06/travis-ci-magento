@@ -1,0 +1,101 @@
+<div class="employee-manager-wrapper">
+    <div class="employee-manager-title">
+        <h2>Employee Manager</h2>
+    </div>
+    <div class="employee-manager-toolbar">
+        <div class="employee-manager-toolbar-left">
+            <div class="search-employee">
+                <input type="text" placeholder="Search employee" data-bind="textInput: search_name" />
+            </div>
+            <a class="add-employee" href="#" data-bind="click: addEmployeeModal">
+                <span>+</span>
+                <span>Add Employee</span>
+            </a>
+        </div>
+        <div class="employee-manager-toolbar-right">
+            <div class="employee-manager-toolbar-right-label">
+                <span>show:</span>
+            </div>
+            <div class="employee-manager-toolbar-right-number">
+                <span class="sizes active size-10" data-bind="click: showEmployee">10</span>
+                <span class="sizes size-25" data-bind="click: showEmployee">25</span>
+                <span class="sizes size-50" data-bind="click: showEmployee">50</span>
+                <span class="sizes size-100" data-bind="click: showEmployee">100</span>
+            </div>
+        </div>
+    </div>
+    <div class="employee_list">
+
+        <div class="table-wrapper main-list" data-bind="foreach: { data: employees, as: 'employee' }">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Display Area</th>
+                    <th>Printed Name</th>
+<!--                    <th>Comment</th>-->
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody  data-bind="foreach: { data: Object.values(employee), as: 'm' }">
+                <tr class="" data-bind="attr: {
+                                            'data-id': m.entity_id}">
+                    <td data-th="Name" data-bind="text: m.name"></td>
+                    <td data-th="Status"  data-bind="text: m.status == 1 ? 'full time' : 'part time'"> </td>
+                    <td  data-th="Display area" data-bind="text: m.display_area == 1 ? 'Male' : 'Female'"> </td>
+                    <td  data-th="Printed name" data-bind="text: m.printed_name ? m.printed_name: '-'"> </td>
+<!--                    <td  data-bind="text: m.comment"> </td>-->
+
+                    <td data-th="Actions">
+                        <button class="edit-employee" >
+                            <a data-bind="attr: {href: $parents[1].url() + m.entity_id}" >
+                                <i class="edit"></i>
+                            </a>
+                        </button>
+                        <button class="delete-employee" data-bind="click: $parents[1].deleteEmployee">
+                            <i class="trash"></i>
+                        </button>
+                    </td>
+                    <td data-th="Order" style="text-align: right">
+                        <button class="button action primary">
+                            <a style="color:#fff;" data-bind="text: 'View Info',attr: {href: $parents[1].url() + m.entity_id}" >
+
+                            </a>
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="loader">
+            <div class="load-wrapp">
+                <div class="load-6">
+                    <div class="letter-holder">
+                        <div class="l-1 letter">L</div>
+                        <div class="l-2 letter">o</div>
+                        <div class="l-3 letter">a</div>
+                        <div class="l-4 letter">d</div>
+                        <div class="l-5 letter">i</div>
+                        <div class="l-6 letter">n</div>
+                        <div class="l-7 letter">g</div>
+                        <div class="l-8 letter">.</div>
+                        <div class="l-9 letter">.</div>
+                        <div class="l-10 letter">.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span data-bind="afterRender: loadJsAfterKoRender"></span>
+</div>
+
+
+<div class="employee_delete_wrapper" id="popup-modal-delete" style="display:none;">
+    <p>Are you sure you want to delete <span data-bind="text: name"></span></p>
+</div>

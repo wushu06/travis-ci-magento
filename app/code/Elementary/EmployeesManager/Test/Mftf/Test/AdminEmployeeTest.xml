@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminEmployeeTest">
+        <annotations>
+            <features value="BackendEmployee"/>
+            <stories value="Login on the Admin Login page and create employee"/>
+            <title value="Admin should be able to log into the Magento Admin backend and create employee"/>
+            <description value="Admin should be able to log into the Magento Admin backend and create employee"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="ADMINEMPLOYEE-71572"/>
+            <group value="example"/>
+            <group value="login"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        </before>
+        <after>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+        <actionGroup ref="AdminCreateEmployee" stepKey="AdminCreateEmployee"/>
+    </test>
+</tests>

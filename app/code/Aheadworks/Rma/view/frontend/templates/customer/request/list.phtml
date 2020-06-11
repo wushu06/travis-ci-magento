@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\ListRequest */
+$requests = $block->getCustomerRequests()->getItems();
+?>
+<?php if ($requests && count($requests)): ?>
+    <div class="table-wrapper">
+        <table class="aw-rma-list data table hover-light">
+            <caption class="table-caption"><?php echo $block->escapeHtml(__('My Returns')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?php echo $block->escapeHtml(__('Return #')) ?></th>
+                    <th scope="col" class="col order_id"><?php echo $block->escapeHtml(__('Order #')) ?></th>
+                    <th scope="col" class="col request-items"><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                    <th scope="col" class="col status"><?php echo $block->escapeHtml(__('Status')) ?></th>
+                    <th scope="col" class="col updated_at"><?php echo $block->escapeHtml(__('Updated At')) ?></th>
+                    <th scope="col" class="col created_at"><?php echo $block->escapeHtml(__('Created At')) ?></th>
+                    <th scope="col" class="col actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($requests as $request): ?>
+                    <tr data-mage-init='{"awRmaButtonControl": {
+                            "newLocation": <?php /* @noEscape */ echo \Zend_Json::encode($block->getRequestViewUrl($request->getId())) ?>
+                        }}'>
+                        <td data-th="<?php echo $block->escapeHtml(__('Return ID')) ?>" class="col id">
+                            <?php /* @noEscape */ echo $request->getIncrementId() ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Order ID')) ?>" class="col order_id">
+                            <?php /* @noEscape */ echo $block->getOrderIncrementId($request) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Product(s)')) ?>" class="col request-items">
+                            <div class="request-items-list">
+                                <?php foreach($request->getOrderItems() as $requestOrderItem): ?>
+                                    <?php echo $block->escapeHtml($block->getOrderItemName($requestOrderItem->getItemId())) ?><br/>
+                                <?php endforeach; ?>
+                            </div>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status">
+                            <?php echo $block->escapeHtml($block->getStorefrontStatusLabel($request)) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Updated At')) ?>" class="col updated_at">
+                            <?php /* @noEscape */ echo $block->formatDate($request->getUpdatedAt()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Created At')) ?>" class="col created_at">
+                            <?php /* @noEscape */ echo $block->formatDate($request->getCreatedAt()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                            <a href="<?php echo $block->escapeUrl($block->getRequestViewUrl($request->getId())) ?>">
+                                <span><?php echo $block->escapeHtml(__('View Request')) ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="aw-rma-list-toolbar toolbar bottom">
+            <?php /* @noEscape */ echo $block->getPagerHtml(); ?>
+        </div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php echo $block->escapeHtml(__('You have no returns.')); ?></span>
+    </div>
+<?php endif ?>

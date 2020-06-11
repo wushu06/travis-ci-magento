@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="page.main.title">
+        <arguments>
+            <argument name="css_class" xsi:type="string">product</argument>
+            <argument name="add_base_attribute" xsi:type="string">itemprop="name"</argument>
+        </arguments>
+    </referenceBlock>
+    <referenceBlock name="product.info.media" remove="true"/>
+    <referenceBlock name="product.info.price" remove="true"/>
+    <referenceBlock name="product.info.review" remove="true"/>
+    <referenceBlock name="product.info.stock.sku" remove="true"/>
+    <move element="product.info.media" destination="page.main.title" after="-"/>
+    <referenceContainer name="product.info.main" htmlTag="div" htmlClass="column-product" />
+    <referenceContainer name="product.info.media" htmlTag="div" htmlClass="column-media" />
+    <container name="product-header-wrapper" htmlTag="div" htmlClass="product-header-wrapper">
+        <block class="Magento\Framework\View\Element\Template" name="cat.image" template="Magento_Catalog::category-image.phtml" />
+    </container>
+    <move element="cat.image" destination="title.div"/>
+    <move element="breadcrumbs" destination="title.div" before="-"/>
+    <move element="page.main.title" destination="title.div" after="-" />
+
+    <referenceBlock name="product.info.details" remove="true" />
+
+</page>

@@ -1,0 +1,22 @@
+<!--@subject {{trans 'Your RMA #%request_text_id status is %request_status' request_text_id=$request.getTextId() request_status=$request.getStatus()}}@-->
+{{template config_path="design/email/header_template"}}
+{{inlinecss file="Aheadworks_Rma::css/email.css"}}
+<p>{{trans 'Dear %customer_name,' customer_name=$request.getCustomerName()}}</p>
+<p>{{trans
+        'Your RMA request #%request_text_id status has been changed to %request_status'
+        request_text_id=$request.getTextId() request_status=$request.getStatus()
+    }}
+</p>
+{{depend request.getCustomText()}}
+    <p>{{var request.getCustomText() |nl2br|raw}}</p>
+{{/depend}}
+{{depend request.getNotifyCommentText()}}
+    <div class="aw-rma__comment">
+        <strong><span>{{var request.getNotifyCommentLabel()}}</span></strong>
+        <div class="comment-text">{{var request.getNotifyCommentText() |nl2br}}</div>
+    </div>
+{{/depend}}
+<p>{{trans 'You can view RMA status and add a message <a href="%url">here</a>.' url=$request.getUrl() |raw}}</p>
+<p>{{trans 'Thank you for using our RMA service.' }}</p>
+
+{{template config_path="design/email/footer_template"}}

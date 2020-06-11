@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="elementary_banner" class="Elementary\Banner\Block\Widget">
+        <label translate="true">Elementary Banner Widget</label>
+        <description>Elementary Banner Widget</description>
+        <parameters>
+            <parameter name="banner_id" xsi:type="select" visible="true" source_model="Elementary\Banner\Model\Source\Banner" sort_order="0" >
+                <label translate="true">Banner Id</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

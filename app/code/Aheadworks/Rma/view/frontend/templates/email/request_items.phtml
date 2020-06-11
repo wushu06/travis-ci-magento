@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var \Aheadworks\Rma\Block\Email\RequestItems $block */
+$items = $block->getRequestItems();
+?>
+<table border="0" class="awrma-datatable">
+    <tbody>
+        <?php if ($items): ?>
+            <?php foreach ($items as $item): ?>
+                <tr class="first">
+                    <th><?php echo $block->escapeHtml(__('Name')) ?></th>
+                    <td><?php echo $block->escapeHtml($item['name']) ?></td>
+                </tr>
+                <tr>
+                    <th><?php echo $block->escapeHtml(__('SKU')) ?></th>
+                    <td><span class="nobr"><?php echo $block->escapeHtml($item['sku']) ?></span></td>
+                </tr>
+                <tr>
+                    <th><?php echo $block->escapeHtml(__('Count')) ?></th>
+                    <td><?php echo $block->escapeHtml($item['qty']) ?></td>
+                </tr>
+                <?php
+                    $countCustomFields = count($item['custom_fields']);
+                    $counter = 0;
+                ?>
+                <?php foreach ($item['custom_fields'] as $label => $value): ?>
+                    <?php $counter++ ?>
+                    <tr class="<?php if ($counter == $countCustomFields): ?>last<?php endif; ?>">
+                        <th><?php echo $block->escapeHtml($label) ?></th>
+                        <td><?php echo $block->escapeHtml($value) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="3"><?php echo $block->escapeHtml(__('No Items Requested.')) ?></td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+<label class="aw-rma__data-grid-radio-cell-inner data-grid-checkbox-cell-inner">
+    <input class="admin__control-radio" type="radio" data-action="select-row"
+        data-bind="
+            staticChecked: $col._selected,
+            disable: !$row()['is_available_order'],
+            checkedValue: $row()[$col.indexField],
+            attr: {
+                id: index + 'check' + $row()[$col.indexField]
+            }">
+    <label attr="for: index + 'check' + $row()[$col.indexField]"/>
+</label>

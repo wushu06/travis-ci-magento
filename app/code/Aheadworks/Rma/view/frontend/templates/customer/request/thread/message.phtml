@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<fieldset class="fieldset">
+    <div class="field message control">
+        <label class="label message" for="message">
+            <span><?php echo $block->escapeHtml(__('Message')) ?></span>
+        </label>
+        <div class="control">
+            <textarea id="message"
+                      name="thread_message[text]"
+                      placeholder="<?php echo $block->escapeHtml(__('Type here to add a message to manager')) ?>"
+                      rows="5"></textarea>
+        </div>
+    </div>
+    <?php echo $block->getChildHtml('file_uploader') ?>
+</fieldset>

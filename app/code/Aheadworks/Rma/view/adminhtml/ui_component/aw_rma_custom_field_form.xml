@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_rma_custom_field_form.aw_rma_custom_field_form_data_source</item>
+            <item name="deps" xsi:type="string">aw_rma_custom_field_form.aw_rma_custom_field_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Custom Fields</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">aw_rma_custom_field_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Aheadworks\Rma\Block\Adminhtml\CustomField\Edit\Button\Back</item>
+            <item name="reset" xsi:type="string">Aheadworks\Rma\Block\Adminhtml\CustomField\Edit\Button\Reset</item>
+            <item name="save" xsi:type="string">Aheadworks\Rma\Block\Adminhtml\CustomField\Edit\Button\Save</item>
+            <item name="save_and_continue" xsi:type="string">Aheadworks\Rma\Block\Adminhtml\CustomField\Edit\Button\SaveAndContinue</item>
+        </item>
+    </argument>
+    <dataSource name="aw_rma_custom_field_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Aheadworks\Rma\Ui\DataProvider\CustomField\FormDataProvider</argument>
+            <argument name="name" xsi:type="string">aw_rma_custom_field_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="aw_rma_admin/customfield/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general_information">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enabled</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">status</item>
+                    <item name="dataScope" xsi:type="string">is_active</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\Type</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Field Type</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">type</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">text</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">${ $.ns }.${ $.ns }.manage_options</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">textarea</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">${ $.ns }.${ $.ns }.manage_options</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">select</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">${ $.ns }.${ $.ns }.manage_options</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="3" xsi:type="array">
+                                <item name="value" xsi:type="string">multiselect</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">${ $.ns }.${ $.ns }.manage_options</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${ $.provider }:data.disableNotEditableField</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="refers">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\Refers</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Refers To</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">refers</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${ $.provider }:data.disableNotEditableField</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="editable_admin_for_status_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\EditAt</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Admin Can Edit On</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">editable_admin_for_status_ids</item>
+                </item>
+            </argument>
+        </field>
+        <field name="visible_for_status_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Request\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Can View On</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">visible_for_status_ids</item>
+                </item>
+            </argument>
+        </field>
+        <field name="editable_for_status_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\CustomerEditAt</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Can Edit On</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">editable_for_status_ids</item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_required">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Required Field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">is_required</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_display_in_label">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Display on Shipping Label</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">is_display_in_label</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_included_in_report">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Include in exported report</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">is_included_in_report</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="website_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Website</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Display on Websites</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">customField</item>
+                    <item name="dataScope" xsi:type="string">website_ids</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="frontend_labels">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Frontend Labels</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="string">20</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <dynamicRows name="frontend_labels">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="addButton" xsi:type="boolean">false</item>
+                    <item name="pageSize" xsi:type="string">100</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="admin__field-wide" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="store_view_name">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="dataScope" xsi:type="string">store_view_name</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Store View</item>
+                            <item name="showFallbackReset" xsi:type="boolean">false</item>
+                            <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="aw_rma__field-small" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="value">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">value</item>
+                            <item name="label" xsi:type="string" translate="true">Label</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="store_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">store_id</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="_hidden" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+            </container>
+        </dynamicRows>
+    </fieldset>
+    <fieldset name="manage_options">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Manage Options (Values of Custom Field)</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="string">30</item>
+                <item name="opened" xsi:type="boolean">true</item>
+                <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/form/components/fieldset</item>
+            </item>
+        </argument>
+        <dynamicRows name="options">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/dynamic-rows/dynamic-rows</item>
+                    <item name="addButtonLabel" xsi:type="string" translate="true">Add Option</item>
+                    <item name="pageSize" xsi:type="string">100</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="admin__field-wide" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record" class="Aheadworks\Rma\Ui\Component\Form\CustomField\RecordOptions">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="positionProvider" xsi:type="string">sort_order</item>
+                    </item>
+                </argument>
+                <field name="sort_order">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">sort_order</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="columnsHeaderClasses" xsi:type="array">
+                                <item name="_hidden" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="_hidden" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="is_default">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="label" xsi:type="string" translate="true">Is Default</item>
+                            <item name="dataScope" xsi:type="string">is_default</item>
+                            <item name="prefer" xsi:type="string">radio</item>
+                            <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/form/element/checkbox</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="number">1</item>
+                                <item name="false" xsi:type="number">0</item>
+                            </item>
+                            <item name="columnsHeaderClasses" xsi:type="array">
+                                <item name="control-table-options-th" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="control-table-options-cell" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="modules" xsi:type="array">
+                                <item name="rows" xsi:type="string">ns = ${ $.ns }, index = options</item>
+                            </item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="enabled">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="label" xsi:type="string" translate="true">Enabled</item>
+                            <item name="dataScope" xsi:type="string">enabled</item>
+                            <item name="value" xsi:type="number">1</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="number">1</item>
+                                <item name="false" xsi:type="number">0</item>
+                            </item>
+                            <item name="columnsHeaderClasses" xsi:type="array">
+                                <item name="control-table-options-th" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="control-table-options-cell" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="is_new">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="dataScope" xsi:type="string">is_new</item>
+                            <item name="value" xsi:type="number">1</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="number">1</item>
+                                <item name="false" xsi:type="number">0</item>
+                            </item>
+                            <item name="columnsHeaderClasses" xsi:type="array">
+                                <item name="_hidden" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="_hidden" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="action_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\Option\Action</item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Action</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="dataScope" xsi:type="string">action_id</item>
+                            <item name="disableLabel" xsi:type="boolean">true</item>
+                            <item name="sortOrder" xsi:type="number">60</item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="full-width" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="action_statuses">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Request\Status</item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Statuses</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="componentType" xsi:type="string">field</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                            <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            <item name="dataScope" xsi:type="string">action_statuses</item>
+                            <item name="filterOptions" xsi:type="boolean">true</item>
+                            <item name="chipsEnabled" xsi:type="boolean">true</item>
+                            <item name="disableLabel" xsi:type="boolean">true</item>
+                            <item name="showPath" xsi:type="boolean">false</item>
+                            <item name="levelsVisibility" xsi:type="number">1</item>
+                            <item name="sortOrder" xsi:type="number">70</item>
+                        </item>
+                    </argument>
+                </field>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminCreateEmployee">
+        <click selector="#menu-magento-customer-customer" stepKey="clickOnMenuItem"/>
+        <wait time="2" stepKey="waitForEmployeePageLoad" after="clickOnMenuItem"/>
+        <click selector="li[data-ui-id='menu-elementary-employeesmanager-elementary-customeremployee']" stepKey="clickOnSubmenuItem"/>
+        <amOnPage url="admin/elementary_employeesmanager/customeremployee/" stepKey="amOnEmployeePage"/>
+        <waitForPageLoad stepKey="pageLoadAfterClick"/>
+        <click stepKey="clickAddButton" selector="#add"/>
+        <fillField stepKey="fillEmployeeName" userInput="Hajar" selector="#customeremployee_name"/>
+        <click stepKey="clickSaveButton" selector="#save"/>
+        <waitForPageLoad stepKey="pageLoadAfterSave"/>
+    </actionGroup>
+</actionGroups>

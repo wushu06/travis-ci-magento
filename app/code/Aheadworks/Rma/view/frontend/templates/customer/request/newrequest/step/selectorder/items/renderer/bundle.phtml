@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\Order\Item\Renderer\Bundle */
+?>
+<?php if ($block->canRender()): ?>
+    <?php if ($block->isFixedPrice()): ?>
+        <?php /* @noEscape */ echo $block->childItemRenderer($block->getItem(), true) ?>
+    <?php else: ?>
+        <tr data-order-id="<?php /* @noEscape */ echo $block->getItem()->getOrder()->getId() ?>"
+            class="order-item-row"
+            style="display: none;">
+            <td data-th="<?php echo $block->escapeHtml(__('Parent Product')) ?>" colspan="7">
+                <?php echo $block->escapeHtml($block->getItem()->getName()) ?>
+            </td>
+        </tr>
+        <?php foreach ($block->getItem()->getChildrenItems() as $childItem): ?>
+            <tr data-order-id="<?php /* @noEscape */ echo $block->getItem()->getOrder()->getId() ?>"
+                class="order-item-row bundle-option"
+                style="display: none;">
+                <td data-th="<?php echo $block->escapeHtml(__('Option Label')) ?>" class="col option-label" colspan="7">
+                    <span><?php echo $block->escapeHtml($block->getOptionLabel($childItem)) ?></span>
+                </td>
+            </tr>
+            <?php /* @noEscape */ echo $block->childItemRenderer($childItem) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endif; ?>

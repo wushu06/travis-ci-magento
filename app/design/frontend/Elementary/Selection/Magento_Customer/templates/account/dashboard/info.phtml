@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-info">
+    <div>
+        <div class="block-title"><strong><?= $block->escapeHtml(__('Account Information')) ?></strong></div>
+        <div class="block-content">
+            <div class="box box-information">
+                <div class="box-content">
+                    <span class="span-label">Name</span>
+                    <p>  <?= $block->escapeHtml($block->getName()) ?></p>
+                    <span class="span-label">Email</span>
+                    <p>  <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?></p>
+                    <?= $block->getChildHtml('customer.account.dashboard.info.extra'); ?>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="box-actions">
+        <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+            <span><?= $block->escapeHtml(__('Edit')) ?></span>
+        </a><!--
+                <a href="<? /*= $block->escapeUrl($block->getChangePasswordUrl()) */ ?>" class="action change-password">
+                    <? /*= $block->escapeHtml(__('Change Password')) */ ?>
+                </a>-->
+    </div>
+
+</div>

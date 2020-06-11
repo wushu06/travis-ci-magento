@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontLoginEmployee">
+        <arguments>
+            <argument name="customer" defaultValue="customer"/>
+        </arguments>
+        <amOnPage stepKey="signinPage" url="/customer/account/login/"/>
+        <waitForPageLoad stepKey="pageLoadBeforeLogin"/>
+        <fillField stepKey="fillEmail" userInput="{{customer.customerEmail}}" selector="{{StorefrontCustomerCreateFormSection.emailField}}"/>
+        <fillField stepKey="passName" userInput="{{customer.pass}}" selector="{{StorefrontCustomerCreateFormSection.passField}}"/>
+        <click stepKey="clickLogInButton" selector="{{StorefrontCustomerCreateFormSection.loginButton}}"/>
+        <waitForPageLoad stepKey="pageLoadAfterLogin"/>
+    </actionGroup>
+</actionGroups>

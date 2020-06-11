@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\View */
+$request = $block->getRmaRequest();
+?>
+<div class="aw-rma__view">
+    <?php if ($block->isStatusApproved()): ?>
+        <div class="block aw-rma__text-block">
+            <p><?php echo $block->escapeHtml(__('Dear customer,')) ?></p>
+            <p><?php echo $block->escapeHtml(__('Your request has been approved. The next steps are:')) ?></p>
+            <ol>
+                <li><?php echo $block->escapeHtml(__('Click or tap "Print label" to print an RMA label.')) ?></li>
+                <li><?php echo $block->escapeHtml(__('Make sure to enclose the label it inside the package.')) ?></li>
+                <li><?php echo $block->escapeHtml(__('When the package has been sent, click or tap "Confirm shipping and update request" button.')) ?></li>
+                <li><?php echo $block->escapeHtml(__('We will be waiting for your package and will notify you when it has arrived.')) ?></li>
+            </ol>
+        </div>
+    <?php endif; ?>
+    <form data-role="aw-rma-update-request-form"
+          action="<?php echo $block->escapeUrl($block->getUpdateRequestUrl()) ?>"
+          method="post">
+        <?php /* @noEscape */ echo $block->getBlockHtml('formkey') ?>
+        <input type="hidden"
+               data-role="aw-rma-request-id"
+               name="id"
+               value="<?php /* @noEscape */ echo $block->getRequestIdentityValue() ?>" />
+        <input data-role="aw-rma-update-request-status"
+               type="hidden"
+               name="status_id"
+               value="<?php /* @noEscape */ echo $request->getStatusId() ?>" />
+        <div class="block aw-rma__block-general">
+            <div class="block-content">
+                <div class="box aw-rma__box-general">
+                    <div class="box-content fieldset">
+                        <div class="field status aw-rma__field">
+                            <label class="label">
+                                <span><?php echo $block->escapeHtml(__('Status')) ?></span>
+                            </label>
+                            <div class="control">
+                                <span>
+                                    <?php echo $block->escapeHtml($block->getStorefrontStatusLabel($request)) ?>
+                                </span>
+                            </div>
+                        </div>
+                        <?php foreach ($request->getCustomFields() as $customField): ?>
+                            <?php /* @noEscape */ echo $block->getRequestCustomFieldsInputHtml($customField) ?>
+                        <?php endforeach; ?>
+                        <div class="field aw-rma__field">
+                            <label class="label"><?php echo $block->escapeHtml(__('Order Date')) ?></label>
+                            <div class="control">
+                                <span>
+                                    <?php /* @noEscape */ echo $block->getOrderCreatedAt() ?>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field aw-rma__field">
+                            <label class="label"><?php echo $block->escapeHtml(__('Order')) ?></label>
+                            <div class="control">
+                                <a href="<?php echo $block->escapeUrl($block->getOrderViewUrl($request->getOrderId())) ?>">
+                                    <span>#<?php /* @noEscape */ echo $block->getOrderIncrementId() ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box aw-rma__box-contact-info">
+                    <div class="box-title">
+                        <?php echo $block->escapeHtml(__('My Address')) ?>
+                    </div>
+                    <div class="box-content"><?php /* @noEscape */ echo $block->getChildHtml('address') ?></div>
+                </div>
+            </div>
+        </div>
+        <div class="block aw-rma__block-items">
+            <div class="block-title">
+                <span><?php echo $block->escapeHtml(__('Items')) ?>:</span>
+            </div>
+            <div class="block-content">
+                <?php /* @noEscape */ echo $block->getItemsHtml() ?>
+            </div>
+        </div>
+        <div class="block aw-rma__block-thread">
+            <?php if ($block->canReply()): ?>
+                <?php /* @noEscape */ echo $block->getThreadMessageHtml() ?>
+                <div class="actions">
+                    <?php /* @noEscape */ echo $block->getChildHtml('actions') ?>
+                </div>
+            <?php endif; ?>
+            <?php /* @noEscape */ echo $block->getThreadListHtml() ?>
+        </div>
+    </form>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=aw-rma-update-request-form]": {
+            "validation": {}
+        }
+    }
+</script>

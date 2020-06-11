@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\Rma\Model\Request\Email\UrlBuilder">
+        <arguments>
+            <argument name="frontendUrlBuilder" xsi:type="object">Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Backend\Block\Widget\Button\Toolbar">
+        <plugin name="addCustomButtonSalesView" type="Aheadworks\Rma\Plugin\Block\WidgetButtonToolbarPlugin" />
+    </type>
+    <type name="Aheadworks\Rma\Ui\DataProvider\Request\Form\DownloadOrderDataProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="orderItems" xsi:type="object">Aheadworks\Rma\Ui\DataProvider\Request\Form\DownloadOrderDataProcessor\OrderItems</item>
+                <item name="orderInfo" xsi:type="object">Aheadworks\Rma\Ui\DataProvider\Request\Form\DownloadOrderDataProcessor\OrderInfo</item>
+                <item name="customerInfo" xsi:type="object">Aheadworks\Rma\Ui\DataProvider\Request\Form\DownloadOrderDataProcessor\CustomerInfo</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Creditmemo\NewAction">
+        <plugin name="awRmaAdjustCreditMemo" type="Aheadworks\Rma\Plugin\Controller\Adminhtml\NewCreditmemoPlugin" />
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Create\Save">
+        <plugin name="awRmaOrderCreateSave" type="Aheadworks\Rma\Plugin\Controller\Adminhtml\OrderCreateSavePlugin" />
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save">
+        <plugin name="awRmaOrderCreditmemoSave" type="Aheadworks\Rma\Plugin\Controller\Adminhtml\OrderCreditmemoSavePlugin" />
+    </type>
+    <type name="Magento\Sales\Api\CreditmemoManagementInterface">
+        <plugin name="awRmaCreditmemoServicePlugin" type="Aheadworks\Rma\Plugin\Model\Adminhtml\CreditmemoServicePlugin" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Creditmemo\Create">
+        <plugin name="awRmaCreditmemoBackButtonPlugin" type="Aheadworks\Rma\Plugin\Block\Adminhtml\CreditMemoBackButtonPlugin" />
+    </type>
+</config>

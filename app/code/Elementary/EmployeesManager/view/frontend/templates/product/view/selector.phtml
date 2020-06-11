@@ -1,0 +1,59 @@
+<?php
+/** @var \Elementary\EmployeesManager\Block\CustomerEmployee\FormCustomerEmployee $block */
+/** @var \Elementary\EmployeesManager\Helper\View $helper */
+$helper = $this->helper('Elementary\EmployeesManager\Helper\View');
+?>
+<?php if ($helper->canViewEmployeeManager()): ?>
+<div class="product-bundle">
+    <?php if($block->showSelector()) : ?>
+    <div class="field region required">
+        <label for="region_id" class="label"><span><?= /* @noEscape */ __('Select Employee') ?></span></label>
+        <div class="control">
+            <select v-model="employee" @change="employeeHandler(event.target.value)" name="employees" id="employeesSelector">
+                <option value="">Select employee</option>
+                <?php
+                foreach ($block->getEmployees() as $employee){
+                    if($employee->getName() != '') : ?>
+                    <option value="<?= $employee->getName() ?>"> <?= $employee->getName() ?></option>
+                    <?php endif; } ?>
+            </select>
+
+        </div>
+    </div>
+        <div class="product-bundle-autocomplete">
+            <div class="autocomplete-wrapper" data-bind="scope: 'searchComponent'">
+                <label for=""><?= /* @noEscape */ __('Type a name') ?></label>
+                <input type="text" id="autocomplete" placeholder="Search employee" data-bind="textInput: search_name" />
+                <div class="dd-list main-list" data-bind="foreach: { data: employees, as: 'employee' }">
+                    <!-- ko if:  Object.values(employee).length > 0 -->
+                    <ul  data-bind="foreach: { data: Object.values(employee), as: 'm' }">
+                        <li  data-bind="click: $parents[1].pickEmployee">
+                            <span data-bind="text: m.name"></span>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
+                </div>
+                <span data-bind="afterRender: loadJsAfterKoRender"></span>
+            </div>
+        </div>
+    <?php  endif; ?>
+</div>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "searchComponent": {
+                        "component": "Elementary_EmployeesManager/js/search",
+                         "searchUrl": "<?php echo $block->searchUrl(); ?>",
+                         "group_id": "<?php echo $helper->getGroupId(); ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<?php endif; ?>
+
+

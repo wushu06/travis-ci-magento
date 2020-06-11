@@ -1,0 +1,91 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\View\Actions */
+$request = $block->getRmaRequest();
+?>
+<div class="aw-rma__actions">
+    <?php /* @noEscape */ echo $block->getChildHtml('back') ?>
+    <?php if ($block->canCancel()): ?>
+        <button data-role="aw-rma-cancel-button"
+                type="button"
+                class="action secondary"
+                title="<?php echo $block->escapeHtml(__('Cancel Request')) ?>">
+            <span><?php echo $block->escapeHtml(__('Cancel Request')) ?></span>
+        </button>
+    <?php endif; ?>
+
+    <?php if ($block->canUpdateRequest()): ?>
+        <button data-role="aw-rma-update-request-button"
+                type="button"
+                class="aw-rma__update_request action primary"
+                title="<?php echo $block->escapeHtml(__('Update Request')) ?>">
+            <span><?php echo $block->escapeHtml(__('Update Request')) ?></span>
+        </button>
+    <?php endif; ?>
+
+    <?php if ($block->canPrintLabel()): ?>
+        <button data-role="aw-rma-print-label-button"
+                type="button"
+                class="action primary"
+                title="<?php echo $block->escapeHtml(__('Print Label')) ?>">
+            <span><?php echo $block->escapeHtml(__('Print Label')) ?></span>
+        </button>
+    <?php endif; ?>
+
+    <?php if ($block->canConfirmShipping()): ?>
+        <button data-role="aw-rma-confirm-shipping-button"
+                type="button"
+                class="aw-rma__update_request action primary"
+                title="<?php echo $block->escapeHtml(__('Confirm Shipping and Update Request')) ?>">
+            <span><?php echo $block->escapeHtml(__('Confirm Shipping and Update Request')) ?></span>
+        </button>
+    <?php endif; ?>
+</div>
+<script type="text/x-magento-init">
+{
+    "[data-role=aw-rma-cancel-button]": {
+        "awRmaButtonControl": {
+            "submitForm": {
+                "formSelector": "<?php /* @noEscape */ echo $block->getUpdateRequestFormSelector() ?>",
+                "actionSelector": "<?php /* @noEscape */ echo $block->getUpdateRequestActionSelector() ?>",
+                "action": "<?php /* @noEscape */ echo $block->getCancelStatusValue() ?>"
+            },
+            "confirm": {
+                "enabled": true,
+                "message": "<?php echo $block->escapeHtml(__('Are you sure you want to cancel this request?')) ?>"
+            }
+        }
+    },
+    "[data-role=aw-rma-print-label-button]": {
+        "awRmaButtonControl": {
+            "newLocation": <?php /* @noEscape */ echo \Zend_Json::encode($block->getPrintLabelUrl()) ?>
+        }
+    },
+    "[data-role=aw-rma-confirm-shipping-button]": {
+        "awRmaButtonControl": {
+            "submitForm": {
+                "formSelector": "<?php /* @noEscape */ echo $block->getUpdateRequestFormSelector() ?>",
+                "actionSelector": "<?php /* @noEscape */ echo $block->getUpdateRequestActionSelector() ?>",
+                "action": "<?php /* @noEscape */ echo $block->getConfirmShippingStatusValue() ?>"
+            },
+            "confirm": {
+                "enabled": true,
+                "message": <?php /* @noEscape */ echo \Zend_Json::encode($block->getConfirmShippingPopupText()) ?>
+            }
+        }
+    },
+    "[data-role=aw-rma-update-request-button]": {
+        "awRmaButtonControl": {
+            "submitForm": {
+                "formSelector": "<?php /* @noEscape */ echo $block->getUpdateRequestFormSelector() ?>"
+            }
+        }
+    }
+}
+</script>

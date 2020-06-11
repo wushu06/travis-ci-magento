@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\Order\Item\Renderer\Configurable */
+?>
+<?php if ($block->canRender()): ?>
+    <?php foreach ($block->getItem()->getChildrenItems() as $childItem): ?>
+        <?php /* @noEscape */ echo $block->childItemRenderer($childItem) ?>
+    <?php endforeach; ?>
+<?php endif; ?>

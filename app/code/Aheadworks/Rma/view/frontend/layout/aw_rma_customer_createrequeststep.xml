@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_price"/>
+    <update handle="aw_rma_thread_message"/>
+    <head>
+        <css src="Aheadworks_Rma::css/style.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-rma__title</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template" name="aw_rma.customer.rma.createrequest.actions"
+                   template="Aheadworks_Rma::customer/request/newrequest/step/createrequest/actions.phtml">
+                <block class="Aheadworks\Rma\Block\BackLink" name="customer.account.link.back" as="back" cacheable="false" />
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <action method="setActive">
+                <argument name="path" xsi:type="string">aw_rma/customer</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Rma\Block\Customer\Request\NewRequest\Step\CreateRequest"
+                   name="aw_rma.customer.rma.new.createrequest" cacheable="false">
+                <block class="Aheadworks\Rma\Block\Customer\Request\NewRequest\Step\CreateRequest\Items"
+                       name="aw_rma.customer.rma.new.createrequest.items" as="items" cacheable="false" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

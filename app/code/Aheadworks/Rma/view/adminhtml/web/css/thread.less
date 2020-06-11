@@ -1,0 +1,124 @@
+@admin__color: #e3e3e3;
+@auto__color: @admin__color;
+@customer__color: #f8f8f8;
+@internal__color: #fff1c9;
+@reply__color: #555555;
+
+.aw-rma__thread-message {
+    width: 50%;
+    float: left;
+
+    .thread-header {
+        margin-bottom: 15px;
+
+        .admin__field {
+            display: inline-block;
+            margin-right: 10px;
+
+            + .admin__field {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .thread-content {
+
+        .message-area {
+            width: ~"calc( (100%) * 1 - 30px )";
+
+            .admin__field-control {
+                .message-is-internal {
+                    background: @internal__color;
+                }
+                textarea {
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .thread-footer {
+
+    }
+}
+
+.aw-rma__actions-switch {
+    .actions-switch-checkbox {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+
+        ~ label {
+            &.action-default {
+                cursor: pointer;
+            }
+
+            &.actions-switch-label-on {
+                background: @admin__color;
+            }
+
+            &.actions-switch-label-off {
+                color: #fff;
+                background: @reply__color;
+            }
+        }
+
+        &:checked {
+            ~ label {
+                &.actions-switch-label-on {
+                    background: @internal__color;
+                }
+
+                &.actions-switch-label-off {
+                    color: #514943;
+                    background: @admin__color;
+                }
+            }
+        }
+    }
+}
+
+.aw-rma__thread-messages {
+    list-style: none;
+    padding: 0;
+    clear: both;
+
+    .thread-message {
+        display: block;
+        margin-bottom: 1rem;
+        padding: 2rem;
+        width: 70%;
+        box-sizing: border-box;
+
+        &.admin {
+            background: @admin__color;
+            margin-left: 30%;
+
+            &.auto {
+                background: @admin__color;
+            }
+
+            &.internal {
+                background: @internal__color;
+            }
+        }
+
+        &.customer {
+            background: @customer__color;
+        }
+
+        .thread-message-attachments,
+        .thread-message-text {
+            margin-top: 1rem;
+        }
+
+        .thread-message-text {
+            white-space: pre-wrap;
+        }
+    }
+}

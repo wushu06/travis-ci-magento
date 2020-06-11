@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\CustomField\Input\Renderer\TextArea */
+?>
+<textarea id="<?php /* @noEscape */ echo $block->getUid() ?>"
+          name="<?php /* @noEscape */ echo $block->getFieldName() ?>"
+          class="<?php /* @noEscape */ echo $block->getFieldClass() ?>"
+          cols="<?php /* @noEscape */ echo $block->getCols() ?>"
+          rows="<?php /* @noEscape */ echo $block->getRows() ?>"
+><?php echo $block->escapeHtml($block->getValue()) ?></textarea>

@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\Rma\Api\CustomFieldRepositoryInterface" type="Aheadworks\Rma\Model\CustomFieldRepository" />
+    <preference for="Aheadworks\Rma\Api\Data\CustomFieldInterface" type="Aheadworks\Rma\Model\CustomField" />
+    <preference for="Aheadworks\Rma\Api\Data\CustomFieldSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Api\Data\CustomFieldOptionInterface" type="Aheadworks\Rma\Model\CustomField\Option" />
+    <preference for="Aheadworks\Rma\Api\Data\StoreValueInterface" type="Aheadworks\Rma\Model\StoreValue" />
+    <preference for="Aheadworks\Rma\Api\Data\StatusEmailTemplateInterface" type="Aheadworks\Rma\Model\Status\EmailTemplate" />
+    <preference for="Aheadworks\Rma\Api\Data\CustomFieldOptionActionInterface" type="Aheadworks\Rma\Model\CustomField\Option\Action" />
+    <preference for="Aheadworks\Rma\Api\CustomFieldOptionActionRepositoryInterface" type="Aheadworks\Rma\Model\CustomField\Option\ActionRepository" />
+    <preference for="Aheadworks\Rma\Api\Data\CustomFieldOptionActionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Api\StatusRepositoryInterface" type="Aheadworks\Rma\Model\StatusRepository" />
+    <preference for="Aheadworks\Rma\Api\Data\StatusInterface" type="Aheadworks\Rma\Model\Status" />
+    <preference for="Aheadworks\Rma\Api\Data\StatusSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Api\RequestRepositoryInterface" type="Aheadworks\Rma\Model\RequestRepository" />
+    <preference for="Aheadworks\Rma\Api\RequestManagementInterface" type="Aheadworks\Rma\Model\Service\RequestService" />
+    <preference for="Aheadworks\Rma\Api\CustomerRequestManagementInterface" type="Aheadworks\Rma\Model\Service\CustomerRequestService" />
+    <preference for="Aheadworks\Rma\Api\Data\RequestInterface" type="Aheadworks\Rma\Model\Request" />
+    <preference for="Aheadworks\Rma\Api\Data\RequestSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Api\Data\RequestItemInterface" type="Aheadworks\Rma\Model\Request\Item" />
+    <preference for="Aheadworks\Rma\Api\Data\RequestCustomFieldValueInterface" type="Aheadworks\Rma\Model\Request\CustomFieldValue" />
+    <preference for="Aheadworks\Rma\Api\Data\RequestPrintLabelInterface" type="Aheadworks\Rma\Model\Request\PrintLabel" />
+    <preference for="Aheadworks\Rma\Api\ThreadMessageRepositoryInterface" type="Aheadworks\Rma\Model\ThreadMessageRepository" />
+    <preference for="Aheadworks\Rma\Api\ThreadMessageManagementInterface" type="Aheadworks\Rma\Model\Service\ThreadMessageService" />
+    <preference for="Aheadworks\Rma\Api\Data\ThreadMessageInterface" type="Aheadworks\Rma\Model\ThreadMessage" />
+    <preference for="Aheadworks\Rma\Api\Data\ThreadMessageSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Api\Data\ThreadMessageAttachmentInterface" type="Aheadworks\Rma\Model\ThreadMessage\Attachment" />
+    <preference for="Aheadworks\Rma\Api\Data\CannedResponseInterface" type="Aheadworks\Rma\Model\CannedResponse" />
+    <preference for="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" type="Aheadworks\Rma\Model\CannedResponseRepository" />
+    <preference for="Aheadworks\Rma\Api\Data\CannedResponseSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Rma\Model\Email\EmailMetadataInterface" type="Aheadworks\Rma\Model\Email\EmailMetadata" />
+    <preference for="Aheadworks\Rma\Model\Serialize\SerializerInterface" type="Aheadworks\Rma\Model\Serialize\Json" />
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Aheadworks\Rma\Api\Data\CustomFieldInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_custom_field</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\StatusInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_request_status</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\RequestInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_request</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\ThreadMessageInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_thread_message</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\CannedResponseInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_canned_response</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\CustomFieldOptionActionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_rma_custom_field_option_action</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="rmaPrintLabelMapper" type="Magento\Framework\EntityManager\CompositeMapper">
+        <arguments>
+            <argument name="mappers" xsi:type="array">
+                <item name="rmaPrintLabelMapper" xsi:type="object">Aheadworks\Rma\Model\Request\PrintLabel\Mapper</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\EntityManager\MapperPool">
+        <arguments>
+            <argument name="mappers" xsi:type="array">
+                <item name="Aheadworks\Rma\Api\Data\RequestInterface" xsi:type="string">rmaPrintLabelMapper</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Aheadworks\Rma\Api\Data\CustomFieldInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Aheadworks\Rma\Api\Data\StatusInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Aheadworks\Rma\Api\Data\ThreadMessageInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Aheadworks\Rma\Api\Data\CannedResponseInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Aheadworks\Rma\Api\Data\CustomFieldInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="optionCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Option\SaveHandler</item>
+                        <item name="websiteCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Website\SaveHandler</item>
+                        <item name="statusCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Status\SaveHandler</item>
+                        <item name="frontendLabelCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\FrontendLabel\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="optionReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Option\ReadHandler</item>
+                        <item name="websiteReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Website\ReadHandler</item>
+                        <item name="statusReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Status\ReadHandler</item>
+                        <item name="frontendLabelReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\FrontendLabel\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="optionUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Option\SaveHandler</item>
+                        <item name="websiteUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Website\SaveHandler</item>
+                        <item name="statusUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\Status\SaveHandler</item>
+                        <item name="frontendLabelUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Relation\FrontendLabel\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\StatusInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="emailTemplateCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\EmailTemplate\SaveHandler</item>
+                        <item name="threadTemplateCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\ThreadTemplate\SaveHandler</item>
+                        <item name="frontendLabelCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\FrontendLabel\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="emailTemplateReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\EmailTemplate\ReadHandler</item>
+                        <item name="threadTemplateReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\ThreadTemplate\ReadHandler</item>
+                        <item name="frontendLabelReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\FrontendLabel\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="emailTemplateUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\EmailTemplate\SaveHandler</item>
+                        <item name="threadTemplateUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\ThreadTemplate\SaveHandler</item>
+                        <item name="frontendLabelUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Relation\FrontendLabel\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\RequestInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="customFieldCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\CustomField\SaveHandler</item>
+                        <item name="itemCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\Item\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="customFieldReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\CustomField\ReadHandler</item>
+                        <item name="itemReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\Item\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="customFieldUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\CustomField\SaveHandler</item>
+                        <item name="itemUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Relation\Item\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\ThreadMessageInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="attachmentCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\ThreadMessage\Relation\Attachment\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="attachmentReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\ThreadMessage\Relation\Attachment\ReadHandler</item>
+                        <item name="ownerNameReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\ThreadMessage\Relation\OwnerName\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="attachmentUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\ThreadMessage\Relation\Attachment\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="Aheadworks\Rma\Api\Data\CannedResponseInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="storeResponseValueCreator" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CannedResponse\Relation\StoreResponseValue\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="storeResponseValueReader" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CannedResponse\Relation\StoreResponseValue\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeResponseValueUpdater" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CannedResponse\Relation\StoreResponseValue\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="aw_rma_custom_field_listing_data_source" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField\Grid\Collection</item>
+                <item name="aw_rma_status_listing_data_source" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status\Grid\Collection</item>
+                <item name="aw_rma_request_listing_data_source" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request\Grid\Collection</item>
+                <item name="aw_rma_canned_response_listing_data_source" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CannedResponse\Grid\Collection</item>
+                <item name="aw_rma_request_order_listing_data_source" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Rma\Model\ResourceModel\CustomField\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_rma_custom_field</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_rma_custom_field_listing_collection</argument>
+            <argument name="eventObject" xsi:type="string">custom_field_listing_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CustomField</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Rma\Model\ResourceModel\Status\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_rma_status</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_rma_status_listing_collection</argument>
+            <argument name="eventObject" xsi:type="string">status_listing_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Status</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Rma\Model\ResourceModel\Request\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_rma_request</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_rma_request_listing_collection</argument>
+            <argument name="eventObject" xsi:type="string">request_listing_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\Request</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Rma\Model\ResourceModel\CannedResponse\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_rma_canned_response</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_rma_canned_response_listing_collection</argument>
+            <argument name="eventObject" xsi:type="string">request_listing_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Rma\Model\ResourceModel\CannedResponse</argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\Rma\Model\Request\PrintLabel\Address\Form\AttributeMeta\Modifier\Attribute\Prefix"
+                 type="Aheadworks\Rma\Model\Request\PrintLabel\Address\Form\AttributeMeta\Modifier\Attribute\PrefixSuffix">
+        <arguments>
+            <argument name="attributeCode" xsi:type="string">prefix</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Rma\Model\Request\PrintLabel\Address\Form\AttributeMeta\Modifier\Attribute\Suffix"
+                 type="Aheadworks\Rma\Model\Request\PrintLabel\Address\Form\AttributeMeta\Modifier\Attribute\PrefixSuffix">
+        <arguments>
+            <argument name="attributeCode" xsi:type="string">suffix</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Rma\Model\Request\PostDataProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="customField" xsi:type="object">Aheadworks\Rma\Model\Request\PostDataProcessor\CustomField</item>
+                <item name="orderItems" xsi:type="object">Aheadworks\Rma\Model\Request\PostDataProcessor\OrderItems</item>
+                <item name="threadMessage" xsi:type="object">Aheadworks\Rma\Model\Request\PostDataProcessor\ThreadMessage</item>
+                <item name="printLabel" xsi:type="object">Aheadworks\Rma\Model\Request\PostDataProcessor\PrintLabel</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Email\Model\Template\Filter">
+        <plugin name="aw-rma-email-template-filter" type="Aheadworks\Rma\Plugin\Model\EmailTemplateFilterPlugin"/>
+    </type>
+    <preference for="Aheadworks\Rma\Model\Status\RestrictionsInterface" type="Aheadworks\Rma\Model\Status\Restrictions" />
+    <type name="Aheadworks\Rma\Model\Status\RestrictionsPool">
+        <arguments>
+            <argument name="customerRestrictions" xsi:type="array">
+                <!-- APPROVED -->
+                <item name="1" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">print_label</item>
+                        <item name="1" xsi:type="string">update</item>
+                        <item name="2" xsi:type="string">cancel</item>
+                        <item name="3" xsi:type="string">confirm_shipping</item>
+                    </item>
+                </item>
+                <!-- CANCELED -->
+                <item name="2" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PENDING_APPROVAL</item>
+                        <item name="1" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::APPROVED</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array"/>
+                </item>
+                <!-- CLOSED -->
+                <item name="3" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array"/>
+                </item>
+                <!-- ISSUE_REFUND -->
+                <item name="4" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                    </item>
+                </item>
+                <!-- PACKAGE_RECEIVED -->
+                <item name="5" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                    </item>
+                </item>
+                <!-- PACKAGE_SENT -->
+                <item name="6" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::APPROVED</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                    </item>
+                </item>
+                <!-- PENDING_APPROVAL -->
+                <item name="7" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">cancel</item>
+                    </item>
+                </item>
+                <!-- CUSTOM STATUS -->
+                <item name="custom" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                    </item>
+                </item>
+            </argument>
+            <argument name="adminRestrictions" xsi:type="array">
+                <!-- APPROVED -->
+                <item name="1" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PENDING_APPROVAL</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">package_received</item>
+                        <item name="2" xsi:type="string">print_label</item>
+                    </item>
+                </item>
+                <!-- CANCELED -->
+                <item name="2" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PENDING_APPROVAL</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">save</item>
+                    </item>
+                </item>
+                <!-- CLOSED -->
+                <item name="3" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::ISSUE_REFUND</item>
+                        <item name="1" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::APPROVED</item>
+                        <item name="2" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PACKAGE_RECEIVED</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">save</item>
+                    </item>
+                </item>
+                <!-- ISSUE_REFUND -->
+                <item name="4" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PACKAGE_RECEIVED</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">close</item>
+                    </item>
+                </item>
+                <!-- PACKAGE_RECEIVED -->
+                <item name="5" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array">
+                        <item name="0" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::APPROVED</item>
+                        <item name="1" xsi:type="const">Aheadworks\Rma\Model\Source\Request\Status::PACKAGE_SENT</item>
+                    </item>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">close</item>
+                        <item name="2" xsi:type="string">issue_refund</item>
+                    </item>
+                </item>
+                <!-- PACKAGE_SENT -->
+                <item name="6" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">package_received</item>
+                    </item>
+                </item>
+                <!-- PENDING_APPROVAL -->
+                <item name="7" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                        <item name="1" xsi:type="string">cancel</item>
+                        <item name="2" xsi:type="string">approve</item>
+                        <item name="3" xsi:type="string">close</item>
+                    </item>
+                </item>
+                <!-- CUSTOM STATUS -->
+                <item name="custom" xsi:type="array">
+                    <item name="available_for_statuses" xsi:type="array"/>
+                    <item name="available_for_actions" xsi:type="array">
+                        <item name="0" xsi:type="string">update</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

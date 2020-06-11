@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="page.wrapper">
+			<block class="Magento\Framework\View\Element\Template" name="top.bar" template="Magento_Theme::html/top-bar.phtml" before="-"/>
+		</referenceContainer>
+
+		<referenceContainer name="header.panel.wrapper" remove="true" />
+        <referenceContainer name="page.top">
+            <referenceBlock name="store.links" remove="true" />
+            <referenceBlock name="store.settings" remove="true" />
+        </referenceContainer>
+		<referenceBlock name="advanced-search-link" remove="true"/>
+		<referenceBlock name="top.search" remove="true"/>
+		<referenceBlock name="view.addto.compare" remove="true" />
+
+		<referenceContainer name="footer-container">
+    		<referenceContainer name="footer">
+    			<referenceBlock name="form.subscribe" remove="true" />
+    			<referenceBlock name="footer_links" remove="true" />
+    			<referenceBlock name="report.bugs" remove="true" />
+                <referenceBlock name="copyright" remove="true"/>
+
+    			<block class="Magento\Theme\Block\Html\Footer" name="footer.content" template="Magento_Theme::footer-content.phtml" />
+    		</referenceContainer>
+    	</referenceContainer>
+		<move element="navigation.sections" destination="header-wrapper" after="logo" />
+		<referenceContainer name="page.top">
+			<container name="title.div" htmlTag="div" htmlClass="title-container" />
+		</referenceContainer>
+		<move element="breadcrumbs" destination="title.div" before="-"/>
+		<move element="page.main.title" destination="title.div" after="-" />
+
+		<referenceBlock name="catalog.topnav" remove="true"/>
+        <referenceBlock name="catalog.topnav" remove="true"/>
+		<referenceBlock name="catalog.leftnav" remove="true" />
+		<referenceBlock name="store_switcher" remove="true" />
+        <referenceBlock name="store.menu">
+            <block class="Selection\Employee\Block\Html\Topmenu" name="catalog.topnav.fix" template="Magento_Theme::html/topmenu.phtml" before="-" />
+        </referenceBlock>
+
+	</body>
+</page>

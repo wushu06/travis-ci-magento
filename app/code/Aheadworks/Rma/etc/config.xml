@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_rma>
+            <general>
+                <return_period>30</return_period>
+                <allow_guest_requests>1</allow_guest_requests>
+                <confirm_shipping_popup_text><![CDATA[Having clicked "Yes", you won't be able to cancel RMA or make any changes.
+Please ensure that:
+1. You have included the RMA Label inside the package
+2. You have sent the package to the RMA department]]></confirm_shipping_popup_text>
+                <allow_auto_approve>0</allow_auto_approve>
+            </general>
+            <contacts>
+                <department_name>Customer Service</department_name>
+            </contacts>
+            <email>
+                <template_to_customer_thread>aw_rma_email_template_to_customer_thread</template_to_customer_thread>
+                <template_to_admin_thread>aw_rma_email_template_to_admin_thread</template_to_admin_thread>
+            </email>
+            <file_attachments>
+                <allow_attach_files>1</allow_attach_files>
+                <max_upload_file_size>2</max_upload_file_size>
+                <allow_file_extensions>zip,rar,jpg,jpeg,png,gif,pdf,doc,docx,xls,xlsx</allow_file_extensions>
+            </file_attachments>
+        </aw_rma>
+    </default>
+</config>

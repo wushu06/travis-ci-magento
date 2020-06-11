@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Magento_Customer::js/dashboard.js" />
+    </head>
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Account</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Sales\Block\Order\Recent" name="customer_account_dashboard_top" template="Magento_Sales::order/recent.phtml"/>
+            <container name="account-wrapper" htmlTag="div" htmlClass="account-wrapper"/>
+            <block class="Magento\Customer\Block\Account\Dashboard\Info" name="customer_account_dashboard_info" as="info" template="Magento_Customer::account/dashboard/info.phtml" cacheable="false"/>
+            <block class="Magento\Customer\Block\Account\Dashboard\Address" name="customer_account_dashboard_address" as="address" template="Magento_Customer::account/dashboard/address.phtml" cacheable="false"/>
+        </referenceContainer>
+
+        <move element="customer_account_dashboard_top" destination="content" before="-" />
+        <move element="customer_account_dashboard_info" destination="account-wrapper" before="-" />
+        <move element="customer_account_dashboard_address" destination="account-wrapper" after="customer_account_dashboard_info" />
+    </body>
+</page>

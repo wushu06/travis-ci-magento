@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+      <move element="sidebar.main.account_nav" destination="page.top" after="-" />
+      <referenceBlock  name="sidebar.main.account_nav" >
+            <arguments>
+                  <argument name="block_css" xsi:type="string">account-nav</argument>
+            </arguments>
+            <block class="Magento\Customer\Block\Account\Navigation" name="customer_account_navigation" before="-">
+                  <arguments>
+                        <argument name="css_class" xsi:type="string">nav items</argument>
+                  </arguments>
+                  <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-link">
+                        <arguments>
+                              <argument name="label" xsi:type="string" translate="true">My Account</argument>
+                              <argument name="path" xsi:type="string">customer/account</argument>
+                              <argument name="sortOrder" xsi:type="number">250</argument>
+                        </arguments>
+                  </block>
+                  <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-orders-link">
+                        <arguments>
+                              <argument name="path" xsi:type="string">sales/order/history</argument>
+                              <argument name="label" xsi:type="string" translate="true">My Orders</argument>
+                              <argument name="sortOrder" xsi:type="number">230</argument>
+                        </arguments>
+                  </block>
+                  <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-address-link">
+                        <arguments>
+                              <argument name="label" xsi:type="string" translate="true">Address Book</argument>
+                              <argument name="path" xsi:type="string">customer/address</argument>
+                              <argument name="sortOrder" xsi:type="number">190</argument>
+                        </arguments>
+                  </block>
+                  <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-edit-link">
+                        <arguments>
+                              <argument name="label" xsi:type="string" translate="true">Account Information</argument>
+                              <argument name="path" xsi:type="string">customer/account/edit</argument>
+                              <argument name="sortOrder" xsi:type="number">180</argument>
+                        </arguments>
+                  </block>
+                  <block class="Magento\Customer\Block\Account\SortLinkInterface" ifconfig="wishlist/general/active" name="customer-account-navigation-wish-list-link">
+                        <arguments>
+                              <argument name="path" xsi:type="string">wishlist</argument>
+                              <argument name="label" xsi:type="string" translate="true">My Wish List</argument>
+                              <argument name="sortOrder" xsi:type="number">210</argument>
+                        </arguments>
+                  </block>
+                  <referenceBlock name="customer_account_navigation">
+                        <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-employee-form">
+                              <arguments>
+                                    <argument name="path" xsi:type="string">employee/manager</argument>
+                                    <argument name="label" xsi:type="string" translate="true">Employees Manager</argument>
+                                    <argument name="sortOrder" xsi:type="number">260</argument>
+                              </arguments>
+                        </block>
+                  </referenceBlock>
+
+            </block>
+      </referenceBlock>
+</page>

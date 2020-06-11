@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\ThreadList*/
+?>
+<ul class="messages">
+    <?php foreach ($block->getThreadMessages() as $threadMessage): ?>
+        <li class="<?php /* @noEscape */ echo $block->getThreadMessageClasses($threadMessage) ?>">
+            <strong>
+                <?php echo $block->escapeHtml($block->getOwnerNameForThreadMessage($threadMessage)) ?>
+                <?php /* @noEscape */ echo $block->formatDate($threadMessage->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?>
+            </strong>
+            <div class="aw-rma-view__message-text"><?php echo $block->escapeHtml($threadMessage->getText()) ?></div>
+            <?php if ($threadMessage->getAttachments()): ?>
+                <?php foreach ($threadMessage->getAttachments() as $attachment): ?>
+                    <div class="aw-rma-view__attachment">
+                        <a target="_blank"
+                           href="<?php echo $block->escapeUrl($block->getDownloadUrl($attachment->getFileName(), $threadMessage->getId())) ?>">
+                            <?php echo $block->escapeHtml($attachment->getName()) ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>

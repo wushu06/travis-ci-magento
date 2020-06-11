@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="aw_rma_email_template_to_admin_status_changed" label="AW RMA - Email to admin, status changed" file="base_to_admin_status_changed.html" type="html" module="Aheadworks_Rma" area="frontend"/>
+    <template id="aw_rma_email_template_to_customer_status_changed" label="AW RMA - Email to customer, status changed" file="base_to_customer_status_changed.html" type="html" module="Aheadworks_Rma" area="frontend"/>
+    <template id="aw_rma_email_template_to_customer_thread" label="Base template to customer" file="base_to_customer_thread.html" type="html" module="Aheadworks_Rma" area="frontend"/>
+    <template id="aw_rma_email_template_to_admin_thread" label="Base template to admin" file="base_to_admin_thread.html" type="html" module="Aheadworks_Rma" area="frontend"/>
+</config>

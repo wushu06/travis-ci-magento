@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\NewRequest\Step\CreateRequest|\Aheadworks\Rma\Block\Guest\Request\NewRequest\Create */
+?>
+<div class="aw-rma-new create-request">
+    <?php if ($block->getReasonsAndDetailsBlockHtml()): ?>
+        <div class="block block-rma-text-block">
+            <?php /* @noEscape */ echo $block->getReasonsAndDetailsBlockHtml() ?>
+        </div>
+    <?php endif; ?>
+    <div class="block block-rma-form">
+        <form data-role="aw-rma-create-request-form"
+              class="aw-rma-new__form"
+              action="<?php echo $block->escapeUrl($block->getSubmitUrl()) ?>"
+              method="post">
+            <fieldset class="fieldset">
+                <?php /* @noEscape */ echo $block->getBlockHtml('formkey') ?>
+                <input type="hidden" name="order_id" value="<?php /* @noEscape */ echo $block->getOrderId() ?>" />
+                <?php foreach ($block->getRequestCustomFields() as $customField): ?>
+                    <?php /* @noEscape */ echo $block->getRequestCustomFieldHtml($customField) ?>
+                <?php endforeach; ?>
+            </fieldset>
+            <fieldset class="fieldset">
+                <legend class="legend">
+                    <span><?php echo $block->escapeHtml(__('Products to Return:')) ?></span>
+                </legend>
+                <?php /* @noEscape */ echo $block->getChildHtml('items') ?>
+            </fieldset>
+            <?php /* @noEscape */ echo $block->getThreadMessageHtml() ?>
+            <?php if ($block->getPolicyBlockHtml()): ?>
+                <div class="aw-rma__policy">
+                    <input type="checkbox" id="policy" name="policy" class="required-entry" />
+                    <label class="label required" for="policy">
+                        <span><?php echo $block->escapeHtml(__('I accept')) ?></span>
+                        <a data-role="aw-rma-show-policy" href="#">
+                            <?php echo $block->escapeHtml(__('Return Policy regulations')) ?>
+                        </a>
+                    </label>
+                    <div id="aw-rma-policy-popup" style="display: none;">
+                        <?php /* @noEscape */ echo $block->getPolicyBlockHtml() ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="aw-rma__actions">
+                <button data-role="aw-rma-create-button"
+                        type="submit"
+                        title="<?php echo $block->escapeHtml(__('Submit Request')) ?>"
+                        class="action primary post-submit-request">
+                    <span><?php echo $block->escapeHtml(__('Submit Request')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=aw-rma-create-request-form]": {
+            "validation": {}
+        },
+        "[data-role=aw-rma-show-policy]": {
+            "awRmaPolicyLink": {}
+        }
+    }
+</script>

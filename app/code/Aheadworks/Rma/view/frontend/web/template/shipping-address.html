@@ -1,0 +1,17 @@
+<div class="shipping-address">
+    <render args="name: 'Aheadworks_Rma/shipping-address/address-renderer/default', data: $data" ifnot="showForm()"/>
+
+    <if args="showForm()">
+        <render args="name: 'Aheadworks_Rma/shipping-address/form', data: $data" />
+        <button type="button"
+                class="action primary save-address-link"
+                data-bind="click: save">
+            <span data-bind="i18n: 'Save'"></span>
+        </button>
+        <button type="button"
+                class="action cancel-edit-address-link"
+                data-bind="click: cancel">
+            <span data-bind="i18n: 'Cancel'"></span>
+        </button>
+    </if>
+</div>

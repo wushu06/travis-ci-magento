@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rma_statuses.xsd">
+    <status>
+        <id>1</id>
+        <is_email_customer>1</is_email_customer>
+        <is_email_admin>0</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>20</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Approved</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value></value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value>aw_rma_email_template_to_customer_status_changed</value>
+                <custom_text><![CDATA[You can now print a label with return address and other information by pressing the link below. The label must be enclosed inside your package; you may want to keep a copy of the label for your records.
+
+Please send your package to:
+{{var request.getNotifyRmaAddress()|nl2br}}
+and press "Confirm Shipping" button after it was sent.]]></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request has been approved.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>2</id>
+        <is_email_customer>1</is_email_customer>
+        <is_email_admin>1</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>70</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Canceled</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value>aw_rma_email_template_to_admin_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value>aw_rma_email_template_to_customer_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request has been cancelled.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>3</id>
+        <is_email_customer>1</is_email_customer>
+        <is_email_admin>0</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>60</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Closed</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value></value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value>aw_rma_email_template_to_customer_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request has been closed.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>4</id>
+        <is_email_customer>0</is_email_customer>
+        <is_email_admin>1</is_email_admin>
+        <is_thread>0</is_thread>
+        <sort_order>50</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Issue Refund</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value>aw_rma_email_template_to_admin_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value></value>
+                <custom_text></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request obtained "Issue Refund" status.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>5</id>
+        <is_email_customer>1</is_email_customer>
+        <is_email_admin>0</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>40</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Package Received</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value></value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value>aw_rma_email_template_to_customer_status_changed</value>
+                <custom_text><![CDATA[We have received your RMA package and you can expect a resolution shortly.]]></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request obtained "Package Received" status.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>6</id>
+        <is_email_customer>0</is_email_customer>
+        <is_email_admin>1</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>30</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Package Sent</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value>aw_rma_email_template_to_admin_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value></value>
+                <custom_text></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request obtained "Package Sent" status.</value>
+            </thread_template>
+        </attributes>
+    </status>
+    <status>
+        <id>7</id>
+        <is_email_customer>1</is_email_customer>
+        <is_email_admin>1</is_email_admin>
+        <is_thread>1</is_thread>
+        <sort_order>10</sort_order>
+        <attributes>
+            <frontend_label>
+                <value>Pending Approval</value>
+            </frontend_label>
+            <email_template>
+                <template_type>admin</template_type>
+                <value>aw_rma_email_template_to_admin_status_changed</value>
+                <custom_text></custom_text>
+            </email_template>
+            <email_template>
+                <template_type>customer</template_type>
+                <value>aw_rma_email_template_to_customer_status_changed</value>
+                <custom_text><![CDATA[Our support team will get back to you shortly.]]></custom_text>
+            </email_template>
+            <thread_template>
+                <value>The request is pending approval.</value>
+            </thread_template>
+        </attributes>
+    </status>
+</config>

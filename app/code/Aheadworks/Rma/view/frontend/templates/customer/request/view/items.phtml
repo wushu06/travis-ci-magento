@@ -1,0 +1,59 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\View\Items */
+?>
+<div class="aw-rma__view-items">
+    <?php if ($orderItems = $block->getOrderItems()): ?>
+        <?php foreach ($orderItems as $requestOrderItem): ?>
+            <?php $itemId = $requestOrderItem->getItemId(); ?>
+            <div class="aw-rma__return-item-container">
+                <div class="item-details">
+                    <div class="product-details">
+                        <?php if ($block->getItemProduct($itemId)): ?>
+                            <div class="product product-item-image">
+                                <?php /* @noEscape */ echo $block->getItemProductImageHtml($itemId); ?>
+                            </div>
+                            <div class="product details product-item-details">
+                                <a href="<?php echo $block->escapeUrl($block->getItemProductUrl($itemId)) ?>">
+                                    <span><?php echo $block->escapeHtml($block->getItemName($itemId)) ?></span>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <?php echo $block->escapeHtml($block->getItemName($itemId)) ?>
+                        <?php endif; ?>
+                        <?php echo $block->getItemPriceHtml($itemId); ?>
+                    </div>
+                </div>
+
+                <div class="item-return-details">
+                    <div class="content">
+                        <div class="fieldset">
+                            <input type="hidden"
+                                   name="order_items[<?php /* @noEscape */ echo $requestOrderItem->getItemId() ?>][item_id]"
+                                   value="<?php /* @noEscape */ echo $requestOrderItem->getItemId() ?>" />
+                            <div class="field aw-rma__field">
+                                <label class="label">
+                                    <span><?php echo $block->escapeHtml(__('Qty')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <span><?php /* @noEscape */ echo $requestOrderItem->getQty() ?></span>
+                                </div>
+                            </div>
+                            <?php if ($customFields = $requestOrderItem->getCustomFields()): ?>
+                                <?php foreach ($customFields as $requestOrderItemCustomField): ?>
+                                    <?php /* @noEscape */ echo $block->getRequestItemCustomFieldHtml($requestOrderItemCustomField, $requestOrderItem->getItemId()) ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,10 @@
+<!--@subject {{trans '%store_name RMA #%request_text_id' store_name=$store.name request_text_id=$request.getTextId()}}@-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans 'Dear %customer_name,' customer_name=$request.getCustomerName()}}</p>
+<p>{{trans 'You\'ve got a new reply in your RMA thread:'}}</p>
+<p>{{var request.getNotifyCommentText() |nl2br}}</p>
+<p>{{trans 'You can view and update your RMA <a href="%url">here</a>.' url=$request.getUrl() |raw}}</p>
+<p>{{trans 'Thank you for using our RMA service.'}}</p>
+
+{{template config_path="design/email/footer_template"}}

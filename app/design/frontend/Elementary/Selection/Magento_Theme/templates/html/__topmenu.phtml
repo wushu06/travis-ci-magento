@@ -1,0 +1,123 @@
+<?php
+/**
+ *
+ * @var $helper \Selection\Employee\Helper\View
+ * @var $blockObj Selection\Employee\Block\Product\ListProduct
+ */
+
+$helper = $this->helper('\Selection\Employee\Helper\View');
+$isLoggedIn = $helper->getCustomerId();
+
+$blockObj= $block->getLayout()->createBlock('Selection\Employee\Block\Product\ListProduct');
+
+
+?>
+<a id="nav-icon" href="#menu">
+    start
+</a>
+<div id="page">
+
+
+<div  class="navigation">
+    <nav id="menuo">
+        <ul   class="primary ui-menu">
+            <?php if($isLoggedIn) : ?>
+                <li class="level0 nav-1 first level-top ui-menu-item">
+                    <a href="<?= $this->getUrl() ?>customer/account" class="level-top">
+                        <span><?= __('My Account') ?></span>
+                    </a>
+                </li>
+                <?php
+                if($helper->getCategoyByGroupId() && count($helper->getCategoyByGroupId()) > 0) :
+                    foreach ($helper->getCategoyByGroupId() as $category): ?>
+                        <li class="level0 nav-1 first level-top ui-menu-item">
+                            <a href="<?= $category->getUrl() ?>" class="level-top">
+                                <span><?= $category->getName(); ?></span>
+                            </a>
+                            <?php
+                            $children = $blockObj->getSubCategories($category->getId());
+                            if(!empty($children)): ?>
+                                <ul class="submenu main-menu__inner-list main-menu__inner-list--level1 ui-menu ui-widget ui-widget-content ui-corner-all"  >
+                                    <div class="nav-wrapper">
+                                        <div class="menu-children ui-menu-item-left" role="presentation">
+                                            <?php
+                                            foreach ($children as $id) :
+                                                $child = $blockObj->getCategoryById($id);
+                                                ?>
+                                                <li class="level1 main-menu__inner-item main-menu__inner-item--all main-menu__inner-item--level1 red-border">
+                                                    <a href="<?= $child->getUrl() ?>">
+                                                        <span><?= $child->getName() ?></span>
+                                                    </a>
+                                                    <?php
+                                                    $grandChildren = $blockObj->getSubCategories($child->getId());
+                                                    if(!empty($grandChildren)):
+                                                        ?>
+                                                        <ul class="level1-submenu">
+                                                            <?php
+                                                            foreach ($grandChildren as $gid) :
+                                                                $grandChild = $blockObj->getCategoryById($gid);
+                                                                ?>
+                                                                <li class="red-border">
+                                                                    <a href="<?= $grandChild->getUrl() ?>">
+                                                                        <span><?= $grandChild->getName() ?></span>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endforeach;  ?>
+
+                                                        </ul>
+                                                    <?php endif; ?>
+
+                                                </li>
+
+
+                                            <?php endforeach;  ?>
+                                        </div>
+                                    </div>
+                                </ul>
+                            <?php endif; ?>
+
+                        </li>
+                    <?php
+                    endforeach;
+                endif;?>
+
+                <li class="level0 nav-1 first level-top ui-menu-item">
+                    <a href="<?= $this->getUrl() ?>customer/account/logout" class="level-top">
+                        <span><?= __('Logout') ?></span>
+                    </a>
+                </li>
+            <?php else : ?>
+                <li class="level0 nav-1 first level-top ui-menu-item">
+                    <a href="<?= $this->getUrl() ?>customer/account/" class="level-top">
+                        <span><?= __('Login') ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <li class="level0 nav-1 first level-top ui-menu-item">
+                <a href="<?= $this->getUrl() ?>/contact-us" class="level-top">
+                    <span><?= __('Contact Us') ?></span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+</div>
+
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "wishlist": {
+                    "component": "Magento_Wishlist/js/view/wishlist"
+                }
+            }
+        }
+    },
+    "[data-role=compare-products-link]": {
+    	"Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+    }
+}
+</script>

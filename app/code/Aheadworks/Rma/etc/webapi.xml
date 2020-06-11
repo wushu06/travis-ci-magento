@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Managing RMA Request -->
+    <route url="/V1/awRmaRequest/:requestId" method="GET">
+        <service class="Aheadworks\Rma\Api\RequestRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest/search" method="GET">
+        <service class="Aheadworks\Rma\Api\RequestRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest" method="POST">
+        <service class="Aheadworks\Rma\Api\RequestManagementInterface" method="createRequest"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest" method="PUT">
+        <service class="Aheadworks\Rma\Api\RequestManagementInterface" method="updateRequest"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest/changeStatus" method="POST">
+        <service class="Aheadworks\Rma\Api\RequestManagementInterface" method="changeStatus"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest/printLabelUrl" method="GET">
+        <service class="Aheadworks\Rma\Api\RequestManagementInterface" method="getPrintLabelUrl"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+
+    <!-- Managing RMA Customer Request -->
+    <route url="/V1/awRmaCustomerRequest/:externalLink" method="GET">
+        <service class="Aheadworks\Rma\Api\RequestRepositoryInterface" method="getByExternalLink"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awRmaCustomerRequest" method="POST">
+        <service class="Aheadworks\Rma\Api\CustomerRequestManagementInterface" method="createRequest"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awRmaCustomerRequest" method="PUT">
+        <service class="Aheadworks\Rma\Api\CustomerRequestManagementInterface" method="updateRequest"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest/printLabel" method="GET">
+        <service class="Aheadworks\Rma\Api\CustomerRequestManagementInterface" method="getRequestPrintLabelUrl"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <!-- Managing RMA Status -->
+    <route url="/V1/awRmaStatus/:statusId" method="GET">
+        <service class="Aheadworks\Rma\Api\StatusRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::statuses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaStatus/search" method="GET">
+        <service class="Aheadworks\Rma\Api\StatusRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::statuses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaStatus/:id" method="PUT">
+        <service class="Aheadworks\Rma\Api\StatusRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::statuses"/>
+        </resources>
+    </route>
+
+    <!-- Managing RMA Custom Fields -->
+    <route url="/V1/awRmaCustomField/:customFieldId" method="GET">
+        <service class="Aheadworks\Rma\Api\CustomFieldRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::custom_fields"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCustomField/search" method="GET">
+        <service class="Aheadworks\Rma\Api\CustomFieldRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::custom_fields"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCustomField" method="POST">
+        <service class="Aheadworks\Rma\Api\CustomFieldRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::custom_fields"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCustomField/:id" method="PUT">
+        <service class="Aheadworks\Rma\Api\CustomFieldRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::custom_fields"/>
+        </resources>
+    </route>
+
+    <!-- Managing RMA Thread Message -->
+    <route url="/V1/awRmaThreadMessage/:threadMessageId" method="GET">
+        <service class="Aheadworks\Rma\Api\ThreadMessageRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaThreadMessage/search" method="GET">
+        <service class="Aheadworks\Rma\Api\ThreadMessageRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaThreadMessage" method="POST">
+        <service class="Aheadworks\Rma\Api\ThreadMessageManagementInterface" method="addThreadMessage"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaThreadMessage/attachment" method="GET">
+        <service class="Aheadworks\Rma\Api\ThreadMessageManagementInterface" method="getAttachment"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+
+    <!-- Managing RMA Canned Responses -->
+    <route url="/V1/awRmaCannedResponse/:cannedResponseId" method="GET">
+        <service class="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::canned_responses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCannedResponse/search" method="GET">
+        <service class="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::canned_responses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCannedResponse" method="POST">
+        <service class="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::canned_responses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCannedResponse/:id" method="PUT">
+        <service class="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::canned_responses"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaCannedResponse/:cannedResponseId" method="DELETE">
+        <service class="Aheadworks\Rma\Api\CannedResponseRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::canned_responses"/>
+        </resources>
+    </route>
+</routes>

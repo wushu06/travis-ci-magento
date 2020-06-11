@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Magento\Framework\View\Element\Template" name="aw_rma.thread.message"
+               template="Aheadworks_Rma::customer/request/thread/message.phtml" cacheable="false">
+            <block class="Aheadworks\Rma\Block\Customer\Request\FileUploader" as="file_uploader" name="aw_rma.file.uploader">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="awRmaFileUploader" xsi:type="array">
+                                <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/form/element/file-uploader</item>
+                                <item name="template" xsi:type="string">Aheadworks_Rma/form/element/uploader/uploader</item>
+                                <item name="previewTmpl" xsi:type="string">Aheadworks_Rma/form/element/uploader/preview</item>
+                                <item name="isMultipleFiles" xsi:type="boolean">true</item>
+                                <item name="dataScope" xsi:type="string">uploader.thread_message.attachments</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </block>
+    </body>
+</page>

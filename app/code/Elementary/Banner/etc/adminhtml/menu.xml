@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Elementary_Banner::banner_elements" title="Banner Elements" translate="title" module="Elementary_Banner" sortOrder="999" parent="Magento_Backend::content" resource="Elementary_Banner::banner"/>
+        <add id="Elementary_Banner::banner" title="Banners" translate="title" module="Elementary_Banner" sortOrder="999" parent="Elementary_Banner::banner_elements" action="banner/banner" resource="Elementary_Banner::banner"/>
+        <add id="Elementary_Banner::slide" title="Slides" translate="title" module="Elementary_Banner" sortOrder="999" parent="Elementary_Banner::banner_elements" action="banner/slide" resource="Elementary_Banner::banner"/>
+    </menu>
+</config>

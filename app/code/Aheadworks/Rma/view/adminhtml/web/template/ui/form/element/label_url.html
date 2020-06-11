@@ -1,0 +1,7 @@
+<if args="elementUrl">
+    <a href="#" class="aw-rma-admin__control-label" data-bind="attr: {href: elementUrl}, text: elementLabel"></a>
+</if>
+<ifnot args="elementUrl">
+    <label class="aw-rma-admin__control-label" text="elementLabel" />
+</ifnot>
+<text args="elementAfter"/>

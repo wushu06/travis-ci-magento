@@ -1,0 +1,23 @@
+<?php
+    /** @var Elementary\Banner\Block\Widget $block */
+    $banner = $block->getBanner();
+    $slides = $block->getSlides();
+?>
+<h4>helll</h4>
+<div id="banner-<?= $block->escapeHtmlAttr($banner->getIdentifier()); ?>" class="banner-widget">
+    <?php foreach ($slides as $slide): ?>
+        <div class="slide" style="background-image: url('<?= $block->getSlideImage($slide) ?>')">
+            <a href="<?= $block->escapeUrl($slide->getUrl()); ?>" title="<?= $block->escapeHtmlAttr($slide->getUrlTitle()); ?>">
+                <h3 class="slide-title"><?= $slide->getTitle() ?></h3>
+                <div class="slide-content">
+                    <?= $block->getSlideContent($slide) ?>
+                </div>
+                <?php if ($slide->getShowButton()): ?>
+                    <div class="slide-button">
+                        <?= $slide->getButtonTitle() ?>
+                    </div>
+                <?php endif; ?>
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>

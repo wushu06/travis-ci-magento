@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $block Elementary\EmployeesManager\Block\CustomerEmployee\FormCustomerEmployee
+ * @var $helper Elementary\EmployeesManager\Helper\View
+ */
+$helper = $this->helper('Elementary\EmployeesManager\Helper\View');
+?>
+<?php if ($helper->canViewEmployeeManager()): ?>
+<div id="m2-component-form" data-bind="scope:'formKoComponentList'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#m2-component-form": {
+                "Magento_Ui/js/core/app": {
+                   "components": {
+                        "formKoComponentList": {
+                            "component": "Elementary_EmployeesManager/js/form",
+                            "template" : "Elementary_EmployeesManager/form",
+                             "formUrl": "<?php echo $block->formUrl(); ?>",
+                             "popup": "<?php echo $block->getData('popup') ?>"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+<?php else: ?>
+<p>not allowed</p>
+<?php endif; ?>

@@ -1,0 +1,24 @@
+<div class="shipping-address-previewer">
+    <text args="$parent.address().prefix"/> <text args="$parent.address().firstname"/>
+    <text args="$parent.address().lastname"/> <text args="$parent.address().suffix"/>
+    <br>
+    <text args="$parent.formatStreet($parent.address().street)"/>,
+    <br>
+    <text args="$parent.address().city"/>, <text args="$parent.address().region"/>, <text args="$parent.address().postcode"/>,
+    <text args="$parent.getCountryName($parent.address().country_id)"/>
+    <br>
+    <span translate="'T'"/>: <text args="$parent.address().telephone"/>
+    <br>
+    <!-- ko foreach: { data: $parent.address().custom_attributes, as: 'element' } -->
+    <!-- ko foreach: { data: Object.keys(element), as: 'attribute' } -->
+    <!--ko if: element[attribute] -->
+    <!-- ko text: element[attribute] --><!-- /ko --><br>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- /ko -->
+    <button if="$parent.showEditAddress" type="button"
+            class="action edit-address-link"
+            data-bind="click: $parent.onEditAddressClick">
+        <span data-bind="i18n: 'Edit Address'"></span>
+    </button>
+</div>

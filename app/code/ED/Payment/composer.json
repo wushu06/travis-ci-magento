@@ -1,0 +1,22 @@
+{
+    "name": "ed/module-payment",
+    "description": "",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Nour",
+            "email": "nourwushu@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ED\\Payment\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

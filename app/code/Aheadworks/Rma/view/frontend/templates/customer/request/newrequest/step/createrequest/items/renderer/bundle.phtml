@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\Order\Item\Renderer\Bundle */
+?>
+<?php if ($block->canRender()): ?>
+    <div class="aw-rma__return-bundle-item-container">
+        <?php if ($block->isFixedPrice()): ?>
+            <?php /* @noEscape */ echo $block->childItemRenderer($block->getItem(), true) ?>
+        <?php else: ?>
+            <div class="bundle-product-title">
+                <?php echo $block->escapeHtml($block->getItem()->getName()) ?>
+            </div>
+            <?php foreach ($block->getItem()->getChildrenItems() as $childItem): ?>
+                <div class="bundle-option-label">
+                    <?php echo $block->escapeHtml($block->getOptionLabel($childItem)) ?>
+                </div>
+                <?php /* @noEscape */ echo $block->childItemRenderer($childItem) ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

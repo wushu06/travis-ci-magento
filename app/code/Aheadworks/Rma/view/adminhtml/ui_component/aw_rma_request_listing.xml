@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd"
+         class="Aheadworks\Rma\Ui\Component\Request\Listing">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing_data_source</item>
+            <item name="deps" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">aw_rma_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">New Request</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="aw_rma_request_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Aheadworks\Rma\Ui\DataProvider\Request\DataProviderExtended</argument>
+            <argument name="name" xsi:type="string">aw_rma_request_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">main_table.id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="customer" xsi:type="array">
+                            <item name="0" xsi:type="string">customer_id</item>
+                            <item name="1" xsi:type="string">customer_email</item>
+                        </item>
+                        <item name="order_id" xsi:type="string">*</item>
+                    </item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top" class="Aheadworks\Rma\Ui\Component\Listing\Request\ListingToolbar">
+        <bookmark name="bookmarks" class="Aheadworks\Rma\Ui\Component\Listing\Bookmark">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/bookmarks/bookmarks</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
+                        <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
+                        <item name="namespace" xsi:type="string">aw_rma_request_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.aw_rma_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <filterSelect name="store_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Magento\Store\Ui\Component\Listing\Column\Store\Options</argument>
+                </argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">ns = ${ $.ns }, componentType = column, index = ${ $.index }:visible</item>
+                        </item>
+                        <item name="caption" xsi:type="string" translate="true">All Store Views</item>
+                        <item name="dataScope" xsi:type="string">store_id</item>
+                        <item name="label" xsi:type="string" translate="true">Store</item>
+                    </item>
+                </argument>
+            </filterSelect>
+            <filterInput name="customer_info">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="dataScope" xsi:type="string">customer_info</item>
+                        <item name="label" xsi:type="string" translate="true">Customer</item>
+                        <item name="template" xsi:type="string">ui/grid/filters/field</item>
+                    </item>
+                </argument>
+            </filterInput>
+        </filters>
+        <exportButton name="export_button">
+            <settings>
+                <options>
+                    <option name="cvs" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">aw_rma_admin/rma_export/csv</item>
+                    </option>
+                    <option name="xml" xsi:type="array">
+                        <item name="value" xsi:type="string">xml</item>
+                        <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                        <item name="url" xsi:type="string">aw_rma_admin/rma_export/xml</item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.aw_rma_columns.ids</item>
+                    <item name="displayArea" xsi:type="string">bottom</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <action name="status">
+                <argument name="primaryFieldName" xsi:type="string">id</argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change Status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Aheadworks\Rma\Ui\Component\MassAction\Request\Statuses</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">aw_rma_admin/rma/massChangeStatus</item>
+                        <item name="paramName" xsi:type="string">status</item>
+                    </argument>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="aw_rma_columns" class="Aheadworks\Rma\Ui\Component\Listing\Columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                    <item name="controlVisibility" xsi:type="boolean">true</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.listing_top.bookmarks</item>
+                        <item name="root" xsi:type="string">columns.${ $.index }</item>
+                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
+                    </item>
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">aw_rma_request_listing.aw_rma_request_listing.aw_rma_columns.actions</item>
+                        <item name="target" xsi:type="string">applyAction</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">edit</item>
+                            <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="fieldSwitcher" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="page" xsi:type="string">customer_information</item>
+                        <item name="action" xsi:type="array">
+                            <item name="name" xsi:type="string">componentDisabled</item>
+                            <item name="value" xsi:type="boolean">true</item>
+                            <item name="columns" xsi:type="array">
+                                <item name="0" xsi:type="string">customer</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="controlVisibility" xsi:type="boolean">false</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="draggable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="increment_id" class="Aheadworks\Rma\Ui\Component\Listing\Column\Name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/grid/columns/url</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Request #</item>
+                    <item name="viewUrlPath" xsi:type="string">aw_rma_admin/rma/edit</item>
+                </item>
+            </argument>
+        </column>
+        <column name="order_increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Order #</item>
+                </item>
+            </argument>
+        </column>
+        <column name="payment_method">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Request\PaymentMethod</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Payment Method</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer" class="Aheadworks\Rma\Ui\Component\Listing\Column\Request\Customer">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Customer</item>
+                </item>
+            </argument>
+        </column>
+        <column name="products">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Product(s)</item>
+                </item>
+            </argument>
+        </column>
+        <column name="last_reply_by">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\ThreadMessage\Owner</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Last Reply by</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Request\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>
+        <column name="store_id" class="\Magento\Store\Ui\Component\Listing\Column\Store">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Store</item>
+                </item>
+            </argument>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Updated At</item>
+                </item>
+            </argument>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Aheadworks\Rma\Ui\Component\Listing\Column\Request\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">120</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

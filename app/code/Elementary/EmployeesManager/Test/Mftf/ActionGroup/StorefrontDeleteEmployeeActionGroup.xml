@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontDeleteEmployee">
+        <arguments>
+            <argument name="employee" defaultValue="employee"/>
+            <argument name="customer" defaultValue="customer"/>
+        </arguments>
+        <amOnPage url="employees/customeremployee/" stepKey="amOnEmployeePage"/>
+        <click selector="//button[@class='delete-employee']" stepKey="clickOnDeleteEmployee" />
+        <wait time="3" stepKey="waitForModalLoad" after="clickOnDeleteEmployee"/>
+        <click stepKey="clickDeleteEmployeeButton" selector="{{StorefrontCustomerCreateFormSection.deleteEmployeeButton}}"/>
+        <wait time="3" stepKey="waitForEmployeePageLoad" after="clickDeleteEmployeeButton"/>
+        <waitForElementVisible selector="{{StorefrontCustomerCreateFormSection.success}}" stepKey="waitSuccessMessage"/>
+        <see selector="{{StorefrontCustomerCreateFormSection.success}}" userInput="Employee: John has been deleted" stepKey="seeSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

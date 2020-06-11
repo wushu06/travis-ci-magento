@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Adminhtml\Status\Edit\Preview */
+$preview = $block->getPreview();
+?>
+<div class="aw-rma-preview">
+    <div class="toolbar"></div>
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('From')) ?>:</th>
+                <td>
+                    <?php echo $block->escapeHtml($preview->getSenderName()) ?>
+                    <a href="mailto:<?php /* @noEscape */ echo $preview->getSenderEmail() ?>">
+                        <?php /* @noEscape */ echo $preview->getSenderEmail() ?>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('To')) ?>:</th>
+                <td>
+                    <?php echo $block->escapeHtml($preview->getRecipientName()) ?>
+                    <a href="mailto:<?php /* @noEscape */ echo $preview->getRecipientEmail() ?>">
+                        <?php /* @noEscape */ echo $preview->getRecipientEmail() ?>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Subject')) ?>:</th>
+                <td><?php echo $block->escapeHtml($block->getSubject()) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Content')) ?>:</th>
+                <td><?php /* @noEscape */ echo $block->getContent() ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

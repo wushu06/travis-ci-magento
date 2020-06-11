@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Employees Manager</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block
+                class="Elementary\EmployeesManager\Block\CustomerEmployee\FormCustomerEmployee"
+                name="elementary.employees_manager.customer_employee.form"
+                template="Elementary_EmployeesManager::customer_employee/form.phtml"
+            >
+                <arguments>
+                    <argument name="title" xsi:type="string">Employees Manager</argument>
+                    <argument name="popup" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+            <block
+                class="Elementary\EmployeesManager\Block\CustomerEmployee\ListCustomerEmployee"
+                template="Elementary_EmployeesManager::customer_employee/list.phtml"
+                name="elementary.employees_manager.customer_employee.list"
+            />
+
+        </referenceContainer>
+    </body>
+</page>

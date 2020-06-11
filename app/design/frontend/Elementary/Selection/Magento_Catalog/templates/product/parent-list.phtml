@@ -1,0 +1,103 @@
+
+<?php
+/**
+ *
+ * @var $block \Selection\Employee\Block\Product\ListProduct
+ */
+
+$children = $block->getCategoryChildren();
+?>
+</div>
+</div>
+</div>
+<div>
+    <div class="page-main">
+        <div class="parent-list">
+            <div class=" <?= count($children) <= 2 ? 'start parent-list-wrapper' : 'parent-list-wrapper' ?>">
+                <?php foreach ($children as $child) :  $category = $block->getCategoryById($child)?>
+                    <div class="item product product-item">
+
+                        <div class="product-item-info" data-container="product-">
+
+                            <?php // Product Image
+                            $imageHelper = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Catalog\Helper\Image::class);
+                            $placedoler = $imageHelper->getDefaultPlaceholderUrl('image');
+                            $sub = $block->getSubCategories($child);
+                            ?>
+
+                            <div class="product details product-item-details">
+                                <div class="parent-list-wrapper-parent" style="background: url('<?= $placedoler ?>')  no-repeat center center / cover; min-height: 300px;">
+
+                                    <div class="parent-list-wrapper-parent-text">
+                                        <span>
+                                            <?php
+                                            if(count($sub) > 0) {
+                                                echo  $category->getName();
+                                            }else{
+                                                echo ' <a class="parent-link"
+                                                           href="'.$category->getUrl().' ">
+                                                           '. $category->getName().'
+                                                        </a>';
+                                            }
+
+                                            ?>
+                                        </span>
+                                        <?php
+                                            if(count($sub) > 0):
+                                        ?>
+                                        <i class="fas fa-plus-circle"></i>
+                                        <i class="fas fa-minus-circle"></i>
+                                        <?php endif; ?>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="product-item-inner">
+                                    <?php foreach ($sub as $grandChild) :  $category = $block->getCategoryById($grandChild) ?>
+                                        <div class="product-item-info" data-container="product-">
+
+                                            <div class="item-children">
+                                                <div class="item-children-text">
+                                                    <strong class="product name product-item-name">
+
+                                                            <?= /* @noEscape */ $category->getName(); ?>
+                                                    </strong>
+                                                </div>
+                                                <div class="item-children-btn">
+                                                    <a class="product-item-link"
+                                                       href="<?= $category->getUrl() ?>">
+                                                        Shop
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+
+        $('.parent-list-wrapper-parent').on('click', function () {
+            $(this).find('.fa-plus-circle').toggle()
+            $(this).find('.fa-minus-circle').toggle()
+            $(this).siblings('.product-item-inner').slideToggle();
+        });
+    });
+</script>
+
+
+
+

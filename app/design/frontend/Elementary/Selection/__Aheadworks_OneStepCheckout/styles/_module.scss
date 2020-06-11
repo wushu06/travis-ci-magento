@@ -1,0 +1,170 @@
+.onestepcheckout-index-index{
+  .page-header {
+    border: 1px solid #BEBEBD;
+    margin-bottom: 20px;
+  }
+
+  .page-main {
+    h2 {
+      color: #3A3A37;
+      font-family: "HK Nova";
+      font-size: 20px;
+      margin-top: 0;
+      font-weight: 400;
+    }
+
+    .shipping-method {
+      margin-top: 20px;
+    }
+
+    p, label, input {
+      font-size: 14px;
+      color: #3A3A37;
+    }
+
+    h1 {
+      padding-left: 0;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .control {
+      margin-bottom: 20px;
+    }
+
+    .field.choice, .shipping-method-card div {
+      display: flex;
+      align-items: center;
+
+      input {
+        margin-top: 0;
+        margin-right: 10px;
+      }
+    }
+    .shipping-method-card {
+      background-color: #F8F8F8;
+      padding: 0 10px;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 10px;
+      &:before {
+        position: absolute;
+        content: '';
+        height: 1px;
+        width: 100%;
+        background: #D8D8D8;
+        top: -5px;
+        left: 0;
+      }
+    }
+
+    input {
+      height: 40px;
+      border: 1px solid #E5E5E5;;
+      background-color: #FFFFFF;
+      margin-top: 5px;
+    }
+
+
+    .page-title-wrapper {
+      background: transparent;
+
+      .page-title {
+        visibility: visible;
+        opacity: 1;
+        top: 0;
+      }
+    }
+
+    .checkout-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .aw-onestep.aw-onestep-sidebar {
+        background-color: #F8F4F3;
+        padding: 30px;
+      }
+
+      .field-tooltip {
+        display: none;
+      }
+    }
+    .action.action-toggle, .aw-sidebar_order-note span {
+      background: $color-red;
+      padding: 7px 15px;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .aw-sidebar_order-note {
+      margin-bottom: 20px;
+      .content {
+        margin-top: 10px;
+      }
+    }
+  }
+
+}
+
+
+
+
+/*
+.shipping-method-title {
+  --border-radius: 50%;
+  display: flex;
+  padding: 5px;
+}
+
+.checkbox {
+  --border-radius: 0;
+
+  padding: 5px;
+}
+
+.shipping-method-title input[type="radio"], .checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.shipping-method-title label, .checkbox label {
+  position: relative;
+
+  display: inline-block;
+
+  width: 20px;
+  height: 20px;
+
+  border: 3px solid black;
+  border-radius: var(--border-radius);
+
+  box-sizing: border-box;
+}
+
+.shipping-method-title label::before, .checkbox label::before {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: var(--border-radius);
+
+  background-color: transparent;
+
+  transform: translate(-50%, -50%);
+
+  transition: background-color 0.25s;
+}
+
+.shipping-method-title :checked ~ label::before, .checkbox :checked ~ label::before {
+  background-color: grey;
+}
+*/
+
+

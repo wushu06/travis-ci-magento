@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_rma_custom_field_listing.aw_rma_custom_field_listing_data_source</item>
+            <item name="deps" xsi:type="string">aw_rma_custom_field_listing.aw_rma_custom_field_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">aw_rma_custom_field_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add Custom Field</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="aw_rma_custom_field_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">aw_rma_custom_field_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="aw_rma_custom_field_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="controlVisibility" xsi:type="boolean">false</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="draggable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+        <column name="name" class="Aheadworks\Rma\Ui\Component\Listing\Column\Name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="component" xsi:type="string">Aheadworks_Rma/js/ui/grid/columns/url</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="viewUrlPath" xsi:type="string">aw_rma_admin/customfield/edit</item>
+                </item>
+            </argument>
+        </column>
+        <column name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Enabled</item>
+                </item>
+            </argument>
+        </column>
+        <column name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\Type</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Field Type</item>
+                </item>
+            </argument>
+        </column>
+        <column name="refers">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\CustomField\Refers</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Refers To</item>
+                </item>
+            </argument>
+        </column>
+        <column name="website_ids" class="Aheadworks\Rma\Ui\Component\Listing\Column\CustomField\Website">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Rma\Model\Source\Website</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Websites</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

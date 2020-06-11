@@ -1,0 +1,25 @@
+{
+  "name": "elementary/module-employees-orders",
+  "description": "Elementary_EmployeesOrders magento 2 extension",
+  "require": {
+    "php": "~7.0.13|~7.1.0",
+    "magento/module-backend": "*",
+    "magento/module-config": "*",
+    "magento/module-ui": "*",
+    "magento/module-theme": "*",
+    "magento/framework": "*.*"
+  },
+  "type": "magento2-module",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Elementary\\EmployeesOrders\\": ""
+    }
+  }
+}

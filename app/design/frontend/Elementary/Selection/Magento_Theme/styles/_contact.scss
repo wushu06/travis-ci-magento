@@ -1,0 +1,66 @@
+// contact us
+.cms-contact-us {
+  .breadcrumbs {
+    display: none;
+  }
+  .page-title-wrapper {
+    background: white;
+  }
+  .contact-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+
+    .widget.block.block-static-block {
+      position: absolute;
+      z-index: 99;
+      background: white;
+      padding: 30px;
+      left: 30px;
+      top: 30px;
+      color: #3A3A37;
+      font-size: 16px;
+    }
+  }
+  .contact_details {
+    display: flex;
+    @include max-screen($screen__991) {
+      flex-wrap: wrap;
+      .fieldset {
+        margin-top: 30px;
+      }
+      .fieldset, div {
+        padding-left: 0;
+      }
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: 600;
+    }
+    &_text {
+      .block {
+        p:first-of-type{
+          margin-bottom: 50px;
+        }
+      }
+
+    }
+
+    &_form {
+      input {
+        height: 40px;
+      }
+      label {
+        text-transform: uppercase;
+      }
+      textarea {
+        height: 250px;
+      }
+      button {
+        height: 50px;
+        min-width: 192px;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+  }
+}

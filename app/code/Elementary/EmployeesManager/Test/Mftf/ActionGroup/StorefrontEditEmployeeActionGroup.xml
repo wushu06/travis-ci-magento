@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontEditEmployee">
+        <arguments>
+            <argument name="customer" defaultValue="customer"/>
+            <argument name="employee" defaultValue="employee"/>
+        </arguments>
+        <click selector="table button.action.primary" stepKey="clickOnEditEmployee" />
+        <waitForPageLoad stepKey="pageLoadAfterEditEmployee"/>
+        <see selector="h1" userInput="{{customer.employeeName}}"  stepKey="seeTextInH1"/>
+        <fillField stepKey="fillEmployeeName" userInput="{{customer.employeeEditName}}" selector="{{StorefrontCustomerCreateFormSection.employeeEditNameField}}"/>
+        <click stepKey="clickEditEmployeeButton" selector="{{StorefrontCustomerCreateFormSection.editEmployeeButton}}"/>
+        <waitForElementVisible selector="{{StorefrontCustomerCreateFormSection.success}}" stepKey="waitSuccessMessage"/>
+        <see selector="{{StorefrontCustomerCreateFormSection.success}}" userInput="Employee: {{customer.employeeEditName}} has been saved" stepKey="seeSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

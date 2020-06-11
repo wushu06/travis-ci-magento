@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="sales_order_item_price"/>
+    <update handle="aw_rma_thread_message"/>
+    <update handle="aw_rma_thread_list"/>
+    <head>
+        <css src="Aheadworks_Rma::css/style.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-rma__title</argument>
+            </action>
+            <block class="Aheadworks\Rma\Block\Guest\Request\View\Actions" name="aw_rma.guest.rma.view.actions">
+                <block class="Aheadworks\Rma\Block\BackLink" name="guest.account.link.back" as="back" cacheable="false" />
+            </block>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Rma\Block\Guest\Request\View" name="aw_rma.guest.rma.view" cacheable="false">
+                <block class="Aheadworks\Rma\Block\Guest\Request\View\Actions" as="actions"
+                       name="aw_rma.guest.rma.view.actions.after.thread">
+                    <arguments>
+                        <argument name="only_show_update_actions" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+                <block class="Aheadworks\Rma\Block\Guest\Request\View\Address" name="aw_rma.guest.rma.view.address"
+                       as="address" cacheable="false">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="awRmaViewAddress" xsi:type="array">
+                                    <item name="component" xsi:type="string">Aheadworks_Rma/js/view/shipping-address</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="ajaxSave" xsi:type="boolean">true</item>
+                                    </item>
+                                    <item name="template" xsi:type="string">Aheadworks_Rma/shipping-address</item>
+                                    <item name="provider" xsi:type="string">awRmaAddressProvider</item>
+                                    <item name="deps" xsi:type="array">
+                                        <item name="0" xsi:type="string">awRmaAddressProvider</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="address-fields" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="displayArea" xsi:type="string">address-fields</item>
+                                            <item name="children" xsi:type="array">
+                                                <!-- address fields -->
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="awRmaAddressProvider" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

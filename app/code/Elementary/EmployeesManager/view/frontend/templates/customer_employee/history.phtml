@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var $block Elementary\EmployeesManager\Block\CustomerEmployee\FormCustomerEmployee
+ * @var $helper Elementary\EmployeesManager\Helper\View
+ */
+$helper = $this->helper('Elementary\EmployeesManager\Helper\View');
+
+?>
+<?php if ($helper->canViewEmployeeManager()): ?>
+    <div class="employee-manager">
+        <div id="m2-component-list" data-bind="scope:'contentKoComponentList'">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+            {
+                "#m2-component-list": {
+                    "Magento_Ui/js/core/app": {
+                       "components": {
+                            "contentKoComponentList": {
+                                "component": "Elementary_EmployeesManager/js/history",
+                                "template" : "Elementary_EmployeesManager/history",
+                                 "formUrl": "<?php echo $block->formUrl(); ?>",
+                                 "orderUrl": "<?php echo $block->orderUrl(); ?>"
+                            }
+                        }
+                    }
+                }
+            }
+            </script>
+        </div>
+    </div>
+    <div id="pagination-container"></div>
+
+<?php else: ?>
+    <h2>not allowed</h2>
+<?php endif; ?>

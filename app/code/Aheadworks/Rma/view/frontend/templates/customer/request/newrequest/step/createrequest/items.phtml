@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Customer\Request\NewRequest\Step\CreateRequest\Items */
+?>
+<div class="aw-rma__return-massaction block" data-role="aw-rma-item-mass-action">
+    <div class="box-actions">
+        <a href="#" data-role="select-all" class="action">
+            <span><?php echo $block->escapeHtml(__('Select All')) ?></span>
+        </a>
+        <a href="#" data-role="deselect-all" class="action">
+            <span><?php echo $block->escapeHtml(__('Deselect All')) ?></span>
+        </a>
+    </div>
+</div>
+<div class="aw-rma__return-items control">
+    <?php foreach ($block->getOrderItemsToRequest() as $orderItem): ?>
+        <?php /* @noEscape */ echo $block->getItemRendererHtml($orderItem) ?>
+    <?php endforeach; ?>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=aw-rma-item-mass-action]": {
+            "awRmaRequestItemMassAction": {}
+        },
+        "[data-role=item-return-select]": {
+            "awRmaRequestItemManagement": {}
+        }
+    }
+</script>

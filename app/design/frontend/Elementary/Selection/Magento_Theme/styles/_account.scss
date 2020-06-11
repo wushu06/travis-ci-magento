@@ -1,0 +1,76 @@
+
+// dashboard
+.account {
+  .page-main {
+    a.action {
+      @extend button;
+
+    }
+  }
+  .title-container {
+    margin-bottom: 0;
+  }
+
+  .block.block-dashboard-orders {
+    @extend .box-shadow;
+    margin-bottom: 0;
+    table {
+      table-layout: unset;
+      a.action {
+        margin-bottom: 5px;
+      }
+
+    }
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    @include max-screen($screen__991) {
+      flex-wrap: wrap;
+    }
+
+    & > div {
+      @extend .box-shadow;
+      width: 43%;
+      margin-bottom: 0;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      @include max-screen($screen__991) {
+        width: 100%;
+      }
+      .span-label {
+        color: #7A8EA0;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .box-actions {
+        text-align: right;
+      }
+      .address-action {
+        a:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+    .box.box-information, .box.box-billing-address {
+      width: 100% !important;
+      .box-actions {
+        text-align: right;
+
+      }
+    }
+  }
+}
+body.account.wishlist-index-index {
+  .actions-toolbar {
+    .primary {
+      display: flex;
+      button {
+        background: transparent;
+        color: $color-red;
+      }
+    }
+  }
+}

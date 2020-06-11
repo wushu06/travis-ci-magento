@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<div class="aw-rma__actions">
+    <button data-role="aw-rma-new-button"
+            type="button"
+            class="action primary"
+            title="<?php echo $block->escapeHtml(__('Create New Return')) ?>">
+        <span><?php echo $block->escapeHtml(__('Create New Return')) ?></span>
+    </button>
+</div>
+<script type="text/x-magento-init">
+{
+    "[data-role=aw-rma-new-button]": {
+        "awRmaButtonControl": {
+            "newLocation": <?php /* @noEscape */ echo \Zend_Json::encode($block->getUrl('*/*/new')) ?>
+        }
+    }
+}
+</script>

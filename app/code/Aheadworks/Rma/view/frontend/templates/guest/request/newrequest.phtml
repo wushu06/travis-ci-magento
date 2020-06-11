@@ -1,0 +1,135 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Rma\Block\Guest\Request\NewRequest */
+?>
+<div class="aw-rma-new-guest">
+    <?php if ($block->getGuestPageBlock()): ?>
+        <div class="block block-rma-description">
+            <?php /* @noEscape */ echo $block->getGuestPageBlock() ?>
+        </div>
+    <?php endif; ?>
+    <div class="block block-customer-login">
+        <div class="block-title">
+            <strong><?php echo $block->escapeHtml(__('Registered Customers')) ?></strong>
+        </div>
+        <div class="block-content">
+            <form data-role="aw-rma-guest-login-form"
+                  class="form form-login"
+                  action="<?php echo $block->escapeUrl($block->getLoginPostUrl()) ?>"
+                  method="post">
+                <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
+                <fieldset class="fieldset">
+                    <div class="field note">
+                        <?php echo $block->escapeHtml(__('Did you placed order as registered customer? Sign in with your email address to proceed.')) ?>
+                    </div>
+                    <div class="field email required">
+                        <label class="label" for="email">
+                            <span><?php echo $block->escapeHtml(__('Email')) ?>:</span>
+                        </label>
+                        <div class="control">
+                            <input type="email"
+                                   name="login[username]"
+                                   value=""
+                                   class="input-text required-entry validate-email"
+                                   title="<?php echo $block->escapeHtml(__('Email')) ?>" />
+                        </div>
+                    </div>
+                    <div class="field password required">
+                        <label for="pass" class="label">
+                            <span><?php echo $block->escapeHtml(__('Password')) ?>:</span>
+                        </label>
+                        <div class="control">
+                            <input type="password"
+                                   name="login[password]"
+                                   class="input-text required-entry validate-password"
+                                   title="<?php echo $block->escapeHtml(__('Password')) ?>">
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button data-role="aw-rma-guest-login-submit"
+                                    type="submit"
+                                    title="<?php echo $block->escapeHtml(__('Login')) ?>"
+                                    class="action login primary"
+                                    name="login_submit">
+                                <span><?php echo $block->escapeHtml(__('Login')) ?></span>
+                            </button>
+                        </div>
+                        <div class="secondary">
+                            <a class="action remind"
+                               href="<?php echo $block->escapeUrl($block->getForgotPasswordUrl()) ?>">
+                                <span><?php echo $block->escapeHtml(__('Forgot Your Password?')) ?></span>
+                            </a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="block block-guest-order">
+        <div class="block-title">
+            <strong><?php echo $block->escapeHtml(__('Guest Order')) ?></strong>
+        </div>
+        <div class="block-content">
+            <form data-role="aw-rma-guest-order-form"
+                  class="form form-order"
+                  action="<?php echo $block->escapeUrl($block->getNextPostUrl()) ?>"
+                  method="post">
+                <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
+                <fieldset class="fieldset">
+                    <div class="field note">
+                        <?php echo $block->escapeHtml(__('If you have placed order as guest user, please enter Order Number and Email which has been used for the order.')) ?>
+                    </div>
+                    <div class="field order-number required">
+                        <label class="label" for="order_increment_id">
+                            <span><?php echo $block->escapeHtml(__('Order Number')) ?>:</span>
+                        </label>
+                        <div class="control">
+                            <input type="text"
+                                   name="order_increment_id"
+                                   value=""
+                                   class="input-text required-entry validate-number"
+                                   title="<?php echo $block->escapeHtml(__('Order Number')) ?>">
+                        </div>
+                    </div>
+                    <div class="field email required">
+                        <label class="label" for="email">
+                            <span><?php echo $block->escapeHtml(__('Email')) ?>:</span>
+                        </label>
+                        <div class="control">
+                            <input type="email"
+                                   name="email"
+                                   value=""
+                                   class="input-text required-entry validate-email"
+                                   title="<?php echo $block->escapeHtml(__('Email')) ?>">
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button data-role="aw-rma-guest-order-submit"
+                                    type="submit"
+                                    title="<?php echo $block->escapeHtml(__('Next')) ?>"
+                                    class="action order primary"
+                                    name="order_submit">
+                                <span><?php echo $block->escapeHtml(__('Next')) ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=aw-rma-guest-login-form], [data-role=aw-rma-guest-order-form]": {
+            "validation": {}
+        }
+    }
+</script>
