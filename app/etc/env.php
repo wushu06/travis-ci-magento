@@ -11,9 +11,9 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'localhost',
-                'dbname' => 'm2',
-                'username' => 'root',
-                'password' => 'root',
+                'dbname' => 'magento_db',
+                'username' => 'magento',
+                'password' => 'magento',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
