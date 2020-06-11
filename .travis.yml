@@ -24,6 +24,7 @@ cache:
 before_install:
   - ./${TRAVIS_SCRIPTS_PATH}/before_install.sh
 install:
+  - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}" > auth.json
   - ./${TRAVIS_SCRIPTS_PATH}/install.sh
 script:
   - ./${TRAVIS_SCRIPTS_PATH}/script.sh
