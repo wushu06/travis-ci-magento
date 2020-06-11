@@ -7,3 +7,6 @@ mysql -uroot -e '
     SET @@global.sql_mode = NO_ENGINE_SUBSTITUTION;
     CREATE DATABASE '${DB}';
 '
+mysql -e "CREATE USER magento@localhost IDENTIFIED BY magento;"
+mysql -e "GRANT ALL PRIVILEGES ON magento.* TO 'magento'@'localhost' IDENTIFIED BY 'magento';"
+mysql -e "FLUSH PRIVILEGES;"
