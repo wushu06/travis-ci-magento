@@ -5,8 +5,10 @@ trap '>&2 echo Error: Command \`$BASH_COMMAND\` on line $LINENO failed with exit
 
 SCRIPT_STEP_SCRIPTS_PATH="$(pwd)/scripts/steps/script"
 
-cd $MAGENTO_DIR
+./vendor/phpunit/phpunit/phpunit  app/code/Elementary/EmployeesManager/Test/Unit/Model/CustomerEmployee/TestModel.php
 
-${SCRIPT_STEP_SCRIPTS_PATH}/phpcs.sh
-${SCRIPT_STEP_SCRIPTS_PATH}/phpmd.sh
-${SCRIPT_STEP_SCRIPTS_PATH}/phpcpd.sh
+
+#cd $MAGENTO_DIR
+#${SCRIPT_STEP_SCRIPTS_PATH}/phpcs.sh
+#${SCRIPT_STEP_SCRIPTS_PATH}/phpmd.sh
+#${SCRIPT_STEP_SCRIPTS_PATH}/phpcpd.sh

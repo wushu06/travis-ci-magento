@@ -10,4 +10,4 @@ cd $MAGENTO_DIR
 ${INSTALL_SCRIPTS_PATH}/install_composer_packages.sh
 #${INSTALL_SCRIPTS_PATH}/magento2.0_compatibility.sh
 #${INSTALL_SCRIPTS_PATH}/install_magento_eqp.sh
-${INSTALL_SCRIPTS_PATH}/install_magento.sh
+#${INSTALL_SCRIPTS_PATH}/install_magento.sh
