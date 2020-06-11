@@ -23,7 +23,6 @@ cache:
   directories: ${HOME}/.composer/cache
 before_install:
   - cd ../..
-  - git clone $TRAVIS_SCRIPTS_REPOSITORY $TRAVIS_SCRIPTS_DIR
   - ./${TRAVIS_SCRIPTS_PATH}/before_install.sh
 install:
   - ./${TRAVIS_SCRIPTS_PATH}/install.sh
