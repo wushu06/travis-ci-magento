@@ -12,6 +12,7 @@ BACKEND_FRONTNAME="admin"
 BASE_URL="http://magento.local/"
 DB_HOST="127.0.0.1"
 DB_USER="root"
+DB_PASSWORD="root"
 SESSION_SAVE="files"
 USE_REWRITES=1
 USE_SECURE=0
@@ -27,6 +28,7 @@ php bin/magento setup:install \
     --db-host $DB_HOST \
     --db-name $DB \
     --db-user $DB_USER \
+    --db-password $DB_PASSWORD \
     --session-save $SESSION_SAVE \
     --use-rewrites $USE_REWRITES \
     --use-secure $USE_SECURE \
