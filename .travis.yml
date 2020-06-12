@@ -57,11 +57,4 @@ before_script:
   - chmod +x "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
   - "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
 script:
-  # Set arguments for variants of phpunit based tests; '|| true' prevents failing script when leading test fails
-  - test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php' || true
-
-  # The scripts for grunt/phpunit type tests
-  - if [ $TEST_SUITE == "functional" ]; then dev/tests/functional/vendor/phpunit/phpunit/phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
-  - if [ $TEST_SUITE != "functional" ] && [ $TEST_SUITE != "js" ] && [ $TEST_SUITE != "graphql-api-functional" ]; then phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
-  - if [ $TEST_SUITE == "js" ]; then grunt $GRUNT_COMMAND; fi
-  - if [ $TEST_SUITE == "graphql-api-functional" ]; then phpunit -c dev/tests/api-functional; fi
+  - "./${TRAVIS_SCRIPTS_PATH}/script.sh"
