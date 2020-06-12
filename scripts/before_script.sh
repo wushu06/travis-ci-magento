@@ -163,6 +163,6 @@ case $TEST_SUITE in
         php bin/magento setup:upgrade
 
         echo "Enabling production mode"
-        php bin/magento deploy:mode:set production
+        php bin/magento deploy:mode:set production --skip-compilation
         ;;
 esac
