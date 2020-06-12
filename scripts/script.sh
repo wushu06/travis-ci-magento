@@ -7,6 +7,9 @@ SCRIPT_STEP_SCRIPTS_PATH="$(pwd)/scripts/steps/script"
 echo 'Running unit test';
 ./vendor/phpunit/phpunit/phpunit  app/code/Elementary/EmployeesManager/Test/Unit/Model/CustomerEmployee/TestModel.php
 echo 'Functional test...';
+composer install -d dev/tests/acceptance/
+./vendor/bin/mftf build:project
+cp dev/tests/acceptance/.htaccess.sample dev/tests/acceptance/.htaccess 2>/dev/null || :
 ./vendor/bin/mftf run:test AdminLoginTest --remove
 
 #cd $MAGENTO_DIR
