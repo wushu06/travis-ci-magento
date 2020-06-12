@@ -1,35 +1,60 @@
 sudo: required
 dist: trusty
+group: edge
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+    - postfix
+  firefox: "46.0"
+  hosts:
+      - magento2.travis
+services:
+  - rabbitmq
+  - elasticsearch
 language: php
 php:
-- 7.2
-services:
-- mysql
+  - 7.1
+  - 7.2
 env:
   global:
-  - VENDOR_NAME=Elementary
-  - MODULE_NAME=EmployeesManager
-  - DB=magento_db
-  - MAGENTO_DIR=./
-  - TRAVIS_SCRIPTS_REPOSITORY=https://github.com/akai-z/magento2-travis-ci-scripts.git
-  - TRAVIS_SCRIPTS_DIR=./
-  - TRAVIS_SCRIPTS_PATH=${TRAVIS_SCRIPTS_DIR}/scripts
-  - MODULE_DEPLOY_PATH=app/code/${VENDOR_NAME}/${MODULE_NAME}
-  - COMPOSER_BIN_DIR=~/bin
-  - secure: EsGGspXaNKh2YNy3PJX4ajhS38FcsmAQIVqiZlgxvR4JRBlba+mMNgu2IHar9fQiYwJPdF7qs/GCVxluVa4QhO4nqjs0uEfiCoklaipNcyKO5DODxy0tVU5WcPibPUUmwOn8sEA9v4amMnWxc1kKZiiKWAvxi3IKOmtv0rbSrShsu3/VSOkeQzcxMz0wny/oSZi4m/+82TiEW2SCTrDs11gD1f9sWo/qETQTAkzJZZQZfLvOvhQAR6TcQHDQ60o6YWHbvxb8So3oUL8/3+8krwAPrkHcQ0mDpwdenFa64VsIFiv+doeAq7a4KZClW2ps3Of3dgBUzqmyO5N5mgh+KDuaaxwfj8LluvRDI3D1Qi1Zjd96jg7Rh0vm+rcbRtgjEofojfkeUblyCGofMwRQajHcjWT5/WDjht4H1aCmbY7CwPLjMl8Pxf9uXWvKjrlDf4GWNiKLiX3u4E+1hAuic+5SEuxHyXzNcriw0qTekbykh7RCg6sarxDzn9c70Pjo54Z6d+oX8Zj0mrLSs+jtBuohFGtrlfxZ39f3Kw6WXi824zYonLtn/2XLlOX/3mWKLSfuCVbHtN2xQtywpDkueOfQBAGTpJ8KPE/aW03LvX4CzsCc+yL3GgqCzBRbyZ76PXBbHHyxGd3SnFVhu3DzeRyBnFQQ7HaVymu81uLbl9w=
-  - secure: L8S74YGq0s9c0Z71ZwEaHHK3rMM2TGOYGvPHxGw1o13YlQGFgr+dXTa8HUY7DyyQHiSEJ0QtbpFEuyDE4CP4sSVUaQQW8b1O4UNf58Pip39yylw3ViM8N3fwEDKIJ+D5+Ni9uyaNT9JtoNQWRxzVCkOYWWRviPNnqsnxGKcC+ynayQPnRS6ufolVVaiOw16thmcYpHwSKGyIrzaOOoEtYV2ONFrzCfm9aHFlRJn+/nfojpsZXSZoSeSxFlAvENA9dPoK1SUr0EJgRycUXEwVt2aMh29T+nsvMk4bzjj5huNDv7bMps2kR3cBxcZiMuY/5hmZfV0WIjm22qZbUpP3DV0hM71M4wFIxKVdQ3UVhPu7v2tPM+GEYXJm3UzpEdluRA+4UypxI1N0IRGL+9Vosot+OVWtBfW0ukjfbecUJIsJ5R3wlqD9v325gE867tXP4Y/1GwAp+e0k2aLYOted/wMR8dwiasMe1UMx1WFo6iJohjlxjRtXItX+PvTntJiBuKOIbiHMtV0GGwHKEktrFrxWxlhCwl1/RJacx2M1hPmvLsQYzNOf1bUKDQypDVXli65NgsXRsVvA1Li5lqcPIXtdECIvE3sQ7/4CvZVRUMzlFVeyO37N2MVryY8PpintM97insIcxPuZ07NA0muM+YjUvIRyLCP3b++3m3tTNB8=
+    - COMPOSER_BIN_DIR=~/bin
+    - INTEGRATION_SETS=3
+    - NODE_JS_VERSION=8
+    - MAGENTO_HOST_NAME="magento2.travis"
   matrix:
-  - MAGENTO_VERSION=2.3.4
+    - TEST_SUITE=functional
+matrix:
+  exclude:
+    - php: 7.1
+      env: TEST_SUITE=static
+    - php: 7.1
+      env: TEST_SUITE=js GRUNT_COMMAND=spec
+    - php: 7.1
+      env: TEST_SUITE=js GRUNT_COMMAND=static
+    - php: 7.1
+      env: TEST_SUITE=functional
+    - php: 7.1
+      env: TEST_SUITE=graphql-api-functional
 cache:
   apt: true
-  directories: "${HOME}/.composer/cache"
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.nvm
+    - $HOME/node_modules
+    - $HOME/yarn.lock
 before_install:
-- "./${TRAVIS_SCRIPTS_PATH}/before_install.sh"
-- mysql -u root -e "CREATE USER 'magento'@'localhost' IDENTIFIED BY 'magento';"
-- mysql -u root -e "GRANT ALL ON magento_db.* TO 'magento'@'localhost';"
-install:
-- echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}"
-  > auth.json
-- "./${TRAVIS_SCRIPTS_PATH}/install.sh"
+  - ./dev/travis/before_install.sh
+install: composer install --no-interaction
+before_script: ./dev/travis/before_script.sh
 script:
-- "./${TRAVIS_SCRIPTS_PATH}/script.sh"
+  # Set arguments for variants of phpunit based tests; '|| true' prevents failing script when leading test fails
+  - test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php' || true
+
+  # The scripts for grunt/phpunit type tests
+  - if [ $TEST_SUITE == "functional" ]; then dev/tests/functional/vendor/phpunit/phpunit/phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
+  - if [ $TEST_SUITE != "functional" ] && [ $TEST_SUITE != "js" ] && [ $TEST_SUITE != "graphql-api-functional" ]; then phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
+  - if [ $TEST_SUITE == "js" ]; then grunt $GRUNT_COMMAND; fi
+  - if [ $TEST_SUITE == "graphql-api-functional" ]; then phpunit -c dev/tests/api-functional; fi
