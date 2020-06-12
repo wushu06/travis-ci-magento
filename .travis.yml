@@ -24,6 +24,7 @@ env:
     - INTEGRATION_SETS=3
     - NODE_JS_VERSION=8
     - MAGENTO_HOST_NAME="magento2.travis"
+    - TRAVIS_SCRIPTS_PATH=./scripts
   matrix:
     - TEST_SUITE=functional
 matrix:
@@ -46,6 +47,7 @@ cache:
     - $HOME/node_modules
     - $HOME/yarn.lock
 before_install:
+  - "./${TRAVIS_SCRIPTS_PATH}/before_install.sh"
   - ./before_install.sh
 install: composer install --no-interaction
 before_script: ./before_script.sh
