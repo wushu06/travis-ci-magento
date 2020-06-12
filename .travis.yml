@@ -53,7 +53,9 @@ before_install:
   - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}"
       > auth.json
 install: composer install --no-interaction --prefer-dist
-before_script: "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
+before_script:
+  - chmod +x "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
+  - "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
 script:
   # Set arguments for variants of phpunit based tests; '|| true' prevents failing script when leading test fails
   - test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php' || true
