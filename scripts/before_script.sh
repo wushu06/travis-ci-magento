@@ -114,7 +114,7 @@ case $TEST_SUITE in
             --admin-password="123123q"
 
         echo "Enabling production mode"
-        php bin/magento deploy:mode:set production
+       # php bin/magento deploy:mode:set production
 
         echo "Prepare functional tests for running"
         cd dev/tests/functional
