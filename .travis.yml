@@ -48,9 +48,8 @@ cache:
     - $HOME/yarn.lock
 before_install:
   - "./${TRAVIS_SCRIPTS_PATH}/before_install.sh"
-  - ./before_install.sh
 install: composer install --no-interaction
-before_script: ./before_script.sh
+before_script: "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
 script:
   # Set arguments for variants of phpunit based tests; '|| true' prevents failing script when leading test fails
   - test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php' || true
