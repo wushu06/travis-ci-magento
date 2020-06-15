@@ -7,7 +7,13 @@ SCRIPT_STEP_SCRIPTS_PATH="$(pwd)/scripts/steps/script"
 echo 'Running unit test';
 ./vendor/phpunit/phpunit/phpunit  app/code/Elementary/EmployeesManager/Test/Unit/Model/CustomerEmployee/TestModel.php
 echo 'Functional test...';
-composer install -d dev/tests/acceptance/
+apt-get update &&  apt install default-jdk
+curl -O http://selenium-release.storage.googleapis.com/3.14/selenium-server-standalone-3.14.0.jar
+java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone-3.14.0.jar
+composer require magento/magento2-functional-testing-framework
+composer update
+vendor/bin/mftf generate:tests
+
 ./vendor/bin/mftf build:project
 cp dev/tests/acceptance/.htaccess.sample dev/tests/acceptance/.htaccess 2>/dev/null || :
 ./vendor/bin/mftf run:test AdminLoginTest --remove

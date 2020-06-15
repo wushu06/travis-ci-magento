@@ -52,7 +52,8 @@ before_install:
   - "./${TRAVIS_SCRIPTS_PATH}/before_install.sh"
   - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}"
       > auth.json
-install: composer install --no-interaction --prefer-dist
+install:
+  - composer install --no-interaction --prefer-dist
 before_script:
   - chmod +x "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
   - "./${TRAVIS_SCRIPTS_PATH}/before_script.sh"
